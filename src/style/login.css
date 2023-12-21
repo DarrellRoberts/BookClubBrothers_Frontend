@@ -1,0 +1,24 @@
+:where(.css-dev-only-do-not-override-2rgkd4).ant-modal .ant-modal-content {
+    background-color: rgb(9, 93, 9);
+}
+
+:where(.css-dev-only-do-not-override-2rgkd4).ant-modal .ant-modal-title {
+    background-color: rgb(9, 93, 9);
+}
+
+:where(.css-dev-only-do-not-override-2rgkd4).ant-btn-primary.ant-btn-background-ghost {
+    color: white;
+    border-color: white;
+}
+
+:where(.css-dev-only-do-not-override-2rgkd4).ant-form-item .ant-form-item-label >label {
+    color: white;
+}
+
+:where(.css-dev-only-do-not-override-2rgkd4)[class^="ant-modal"] [class^="ant-modal"] {
+    color: white;
+}
+
+:where(.css-dev-only-do-not-override-2rgkd4).ant-form-item .ant-form-item-control-input-content {
+    color: white;
+}
