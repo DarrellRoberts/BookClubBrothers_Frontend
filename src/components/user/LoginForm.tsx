@@ -26,6 +26,7 @@ const LoginForm: React.FC<Login> = ({setLoginOpen}) => {
 
     if (!response.ok) {
       setError(data.error);
+      setLoadings([false]);
     }
 
     if (response.ok) {

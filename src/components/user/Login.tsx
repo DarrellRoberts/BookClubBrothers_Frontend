@@ -1,5 +1,4 @@
 import { Button, Modal, Form } from "antd";
-import { Link } from "react-router-dom";
 // import Signup from "./Signup";
 import { useState } from "react";
 import LoginForm from "./LoginForm";
@@ -27,14 +26,16 @@ const Login: React.FC = () => {
   };
   return (
     <>
+    <div className="flex items-center">
       <Button
-        className="loginButtons"
+        className="m-5"
         ghost
         type="primary"
         onClick={showModal}
       >
         Login
       </Button>
+      </div>
       <Modal
         title="Login"
         open={loginOpen}
@@ -45,14 +46,14 @@ const Login: React.FC = () => {
       >
         <p>{modalText}</p>
         <Form.Item>
-          Or
+          {/* Or
           <Link
             onClick={() => {
               setLoginOpen(false);
             }}
-          >
+          > */}
             {/* <Signup /> */}
-          </Link>
+          {/* </Link> */}
         </Form.Item>
       </Modal>
     </>

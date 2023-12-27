@@ -16,15 +16,16 @@ interface AuthContextValue {
 
 export const AuthContext = createContext(defaultValue);
 
-const AuthContextProvider: React.FC = (props: AuthContextValue) => {
+const AuthContextProvider: React.FC<{ children?: ReactNode }> = (props) => {
   const [token, setToken] = useState<string | null>(null);
+
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-    console.log("storedToken", storedToken);
     if (storedToken) {
       setToken(storedToken);
     }
   }, []);
+
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token);

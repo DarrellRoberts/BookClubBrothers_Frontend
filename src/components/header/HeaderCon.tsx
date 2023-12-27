@@ -1,14 +1,15 @@
 import Login from "../user/Login"
 import "../../style/header.css"
-import { Button, Space } from "antd"
+import { Button } from "antd"
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useJwt } from "react-jwt";
+import { getTime } from "../../functions/timeFunction";
 
 const HeaderCon:React.FC = () => {
     const [loadings, setLoadings] = useState([]);
     const { logout, token } = useContext(AuthContext);  
-    const { decodedToken } = useJwt(token);
+    const { decodedToken }: { decodedToken?: { username: string} } = useJwt(token);
 
     const enterLoading = (index) => {
         setLoadings((prevLoadings) => {
@@ -32,18 +33,14 @@ const HeaderCon:React.FC = () => {
         logout();
       }, 5000);
     };
-  console.log(decodedToken)
+ const headerMessage = getTime();
 return (
-<div className="headerCon">
+<div className="bg-black flex justify-between">
 {token ? (
             <>
-              <Space>
-                  <div>
-                    <h2>{decodedToken?.name}</h2>
-                  </div>
-                  <div className="logout-darkmode-buttons">
+            <div className="flex items-center">
                     <Button
-                      className="logoutButtons"
+                      className="m-5"
                       type="primary"
                       ghost
                       loading={loadings[0]}
@@ -51,8 +48,12 @@ return (
                     >
                       Logout
                     </Button>
-                  </div>
-              </Space>
+                    </div>
+                    <div className="flex items-center mr-10">
+                    <h2 className="text-white text-3xl">
+                      {`${headerMessage} ${decodedToken?.username}`}
+                      </h2>
+                      </div>
             </>
           ) : (
             <>
