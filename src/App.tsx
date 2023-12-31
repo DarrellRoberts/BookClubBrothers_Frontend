@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom"
 import { useJwt } from "react-jwt";
 import "../src/components/profile/Profilepage"
 import Booklibrary from './components/book/Booklibrary';
+import Brothercat from './components/brothers/Brothercat';
 
 function App() {
   const { token } = useContext(AuthContext);  
@@ -21,6 +22,7 @@ function App() {
       <Route path="/" element={username ? <Dashboard /> : <Homepage />} />
       {/* <Route path="/users/:username" element={<Profilepage />} /> */}
       <Route path="/books" element={<Booklibrary />} />
+      <Route path="/brothers" element={<Brothercat />} />
     </Routes>
     </>
   )

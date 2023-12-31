@@ -10,8 +10,14 @@ const Homepage: React.FC = () => {
         </div>
 
         <div className="brothersCon">
+        <Link to="/brothers">
         <h2>The Brothers</h2>
-        <Link to="/books"><h2>The Books</h2></Link>
+        </Link>
+
+        <Link to="/books">
+            <h2>The Books</h2>
+            </Link>
+
         <h2>The Club</h2>
         </div>
         </>
