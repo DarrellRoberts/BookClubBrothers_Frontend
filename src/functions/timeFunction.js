@@ -2,7 +2,7 @@ import { getDate } from "./dateFunction";
 
 const dateTimeString = getDate();
 
-function getTime(): string {
+function getTime() {
 const [datePart, timePart] = dateTimeString.split(", ");
 const date = datePart;
 date;
@@ -18,7 +18,7 @@ if (hourNum > 4 && hourNum < 12) {
   return "Good Afternoon"
 } else if (hourNum > 17 && hourNum < 22) {
   return "Good Evening"
-} else if (hourNum > 22 && hourNum < 4){
+} else if (hourNum > 22 || hourNum < 4){
   return "It's quite late,"
 } else {
   return "error"

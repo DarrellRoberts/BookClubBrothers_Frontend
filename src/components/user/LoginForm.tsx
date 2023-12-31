@@ -32,6 +32,7 @@ const LoginForm: React.FC<Login> = ({setLoginOpen}) => {
     if (response.ok) {
       setTimeout(() => {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("username", username);
       login(data.token)
       setLoadings([false])
       setLoginOpen(false)
@@ -88,7 +89,7 @@ const LoginForm: React.FC<Login> = ({setLoginOpen}) => {
     >
       <Input
       type="username"
-      onChange={(e) => {setUsername(e.target.value); console.log(username)}}
+      onChange={(e) => {setUsername(e.target.value)}}
       value={username}
       />
     </Form.Item>

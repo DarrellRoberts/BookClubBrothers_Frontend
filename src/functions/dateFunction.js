@@ -1,4 +1,4 @@
-function getDate(): string {
+function getDate() {
     const date = new Date(
         new Date().getFullYear(),
         new Date().getMonth(),
@@ -6,7 +6,7 @@ function getDate(): string {
         new Date().getHours(),
         new Date().getMinutes()
       );
-      const todayResult: string = date.toLocaleDateString("en-GB", {
+      const todayResult = date.toLocaleDateString("en-GB", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",

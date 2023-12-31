@@ -1,3 +1,13 @@
 .headerCon {
     background-color: black;
 }
+
+.box {
+    display: flex;
+}
+
+.boxItem {
+border-width: 5px;
+margin: 5px;
+border-color: black;
+}

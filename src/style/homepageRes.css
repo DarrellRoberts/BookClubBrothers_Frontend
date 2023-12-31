@@ -1,0 +1,14 @@
+
+@media screen and (max-width: 800px) {
+    h1 {
+        font-family: var(--main);
+        font-size: 3rem;
+    }
+
+    .brothersCon {
+        flex-direction: column;
+        align-items: center;
+        font-size: 2rem;
+    }
+    
+}

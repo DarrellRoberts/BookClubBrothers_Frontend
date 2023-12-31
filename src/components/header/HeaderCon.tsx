@@ -1,5 +1,6 @@
 import Login from "../user/Login"
 import "../../style/header.css"
+import "../../style/headerRes.css"
 import { Button } from "antd"
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
@@ -30,6 +31,7 @@ const HeaderCon:React.FC = () => {
       enterLoading(0);
       setTimeout(() => {
         localStorage.removeItem("token");
+        localStorage.removeItem("username");
         logout();
       }, 5000);
     };
@@ -50,7 +52,7 @@ return (
                     </Button>
                     </div>
                     <div className="flex items-center mr-10">
-                    <h2 className="text-white text-3xl">
+                    <h2 className="text-white text-3xl greeting">
                       {`${headerMessage} ${decodedToken?.username}`}
                       </h2>
                       </div>
