@@ -22,3 +22,29 @@
 :where(.css-dev-only-do-not-override-gzal6t).ant-form-item .ant-form-item-control-input-content {
     color: white;
 }
+
+/* deployed version */
+:where(.css-gzal6t).ant-modal .ant-modal-content {
+    background-color: rgb(9, 93, 9);
+}
+
+:where(.css-gzal6t).ant-modal .ant-modal-title {
+    background-color: rgb(9, 93, 9);
+}
+
+:where(.css-gzal6t).ant-btn-primary.ant-btn-background-ghost {
+    color: white;
+    border-color: white;
+}
+
+:where(.css-gzal6t).ant-form-item .ant-form-item-label >label {
+    color: white;
+}
+
+:where(.css-gzal6t)[class^="ant-modal"] [class^="ant-modal"] {
+    color: white;
+}
+
+:where(.css-gzal6t).ant-form-item .ant-form-item-control-input-content {
+    color: white;
+}
