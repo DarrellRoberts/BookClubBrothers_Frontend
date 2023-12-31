@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useJwt } from "react-jwt";
 import { getTime } from "../../functions/timeFunction";
+import { Link } from "react-router-dom"
 
 const HeaderCon:React.FC = () => {
     const [loadings, setLoadings] = useState([]);
@@ -52,9 +53,11 @@ return (
                     </Button>
                     </div>
                     <div className="flex items-center mr-10">
+                      <Link to="/">
                     <h2 className="text-white text-3xl greeting">
                       {`${headerMessage} ${decodedToken?.username}`}
                       </h2>
+                      </Link>
                       </div>
             </>
           ) : (

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
-import { useContext } from "react"
+import { useEffect, useState, useContext } from "react"
+import { Link } from "react-router-dom"
 import { AuthContext } from "../../context/authContext";
 import { useJwt } from "react-jwt";
+
 
 const Dashboard: React.FC = () => {
 const [userData, setUserData] = useState([]);
@@ -101,6 +102,12 @@ className="boxItem">
 <h2>Share of books read: {percentageBooks}%</h2>
 <h2>Average Score: {averageScore}</h2>
 </div>
+</div>
+
+<div 
+className="m-10 border-4 border-black p-3 rounded-lg bg-black text-white"
+>
+<Link to="/books"><h2>Book Library</h2></Link>
 </div>
 
 <div className="m-10 border-4 border-black p-3 rounded-lg bg-black text-white">
