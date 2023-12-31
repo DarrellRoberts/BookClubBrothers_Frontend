@@ -59,12 +59,15 @@ const findUser = userData.find((user) => user._id === id )
     //unread books
     const filterUnreadBooks = bookData.filter((book) => !book.scoreRatings.raterId.includes(decodedToken._id))
 
+    // comments
+    const filterComments = bookData.filter((book) => book.commentInfo.commentId.includes(decodedToken._id))
+
     useEffect(() => {
     getData();
     getBookData();
 }, [])
 
-console.log(filterUnreadBooks);
+console.log(filterComments);
 return (
 <>
 <div className="box">
@@ -123,6 +126,21 @@ Unread Books
     ))}
 </ul>
 </div>
+
+<div className="m-10 border-4 border-black p-3 rounded-lg bg-black text-white">
+<h2 className="underline">
+Comments
+</h2>
+<ul>
+    {filterComments.length === 0 ? (
+        <li> You have written no comments...boring bastard</li>
+        ) : filterComments.map((book) =>
+    (
+        <li>{book.title}: "{book.commentInfo.comments[book?.commentInfo?.commentId?.indexOf(decodedToken._id)]}"</li>
+    ))}
+</ul>
+</div>
+
 
 </>
     )
