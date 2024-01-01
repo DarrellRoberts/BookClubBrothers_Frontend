@@ -15,11 +15,12 @@ const Homepage: React.FC = () => {
         </Link>
 
         <Link to="/books">
-            <h2>The Books</h2>
-            </Link>
+        <h2>The Books</h2>
+        </Link>
 
         <h2>The Club</h2>
         </div>
+
         </>
     )
 }

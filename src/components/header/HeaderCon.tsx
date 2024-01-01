@@ -63,6 +63,13 @@ return (
           ) : (
             <>
               <Login />
+              <Link to="/">
+              <div className="border-4 border-white border-solid p-3 m-2">
+                  <h2 className="logo">
+                    B
+                  </h2>
+              </div>
+              </Link>
               </>
     )
 }

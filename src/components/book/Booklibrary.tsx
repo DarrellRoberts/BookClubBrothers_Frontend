@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react"
+import Loader from "../loader/Loader";
 
 const Booklibrary: React.FC = () => {
 const [bookData, setBookData] = useState([]);
+const [loading, setLoading] = useState(true)
 
     const getBookData = async () => {
         const data = await fetch(`https://bookclubbrothers-backend.onrender.com/books`);
         const book = await data.json()
         setBookData(book);
+        setLoading(false)
         }
 
     useEffect(() => {
@@ -16,6 +19,11 @@ const [bookData, setBookData] = useState([]);
 console.log(bookData);
 return (
 <>
+{loading ? (
+    <div className="w-screen h-screen flex justify-center items-center">
+    <Loader />
+    </div>
+) : (
 <div className="flex flex-wrap">
   {bookData.map((book) => (
     <div key={book.id}>
@@ -29,6 +37,7 @@ return (
     </div>
   ))}
 </div>
+)}
 </>
     )
 }

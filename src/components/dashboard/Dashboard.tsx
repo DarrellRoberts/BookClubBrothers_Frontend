@@ -2,11 +2,13 @@ import { useEffect, useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../context/authContext";
 import { useJwt } from "react-jwt";
+import Loader from "../loader/Loader";
 
 
 const Dashboard: React.FC = () => {
 const [userData, setUserData] = useState([]);
 const [bookData, setBookData] = useState([]);
+const [loading, setLoading] = useState(true)
 const { token } = useContext(AuthContext);
 
 const { decodedToken }: { 
@@ -44,6 +46,7 @@ const findUser = userData.find((user) => user._id === id )
         const data = await fetch(`https://bookclubbrothers-backend.onrender.com/books`);
         const book = await data.json()
         setBookData(book);
+        setLoading(false);
         }
     
     const findMinBook = bookData.find((book) => book._id === minScoreBook)
@@ -70,6 +73,12 @@ const findUser = userData.find((user) => user._id === id )
 
 console.log(filterComments);
 return (
+<>
+{loading ? (
+    <div className="w-screen flex justify-center">
+    <Loader />
+    </div>
+) : (
 <>
 <div className="box">
 <div 
@@ -147,7 +156,8 @@ Comments
     ))}
 </ul>
 </div>
-
+</>
+)}
 
 </>
     )

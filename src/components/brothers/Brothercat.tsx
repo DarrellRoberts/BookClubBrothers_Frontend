@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react"
+import Loader from "../loader/Loader"
 
 const Brothercat: React.FC = () => {
 const [userData, setUserData] = useState([])
+const [loading, setLoading] = useState(true)
 
     const getData = async () => {
         const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users`);
         const user = await data.json()
         setUserData(user);
+        setLoading(false);
     }
 
 useEffect(() => { 
@@ -14,6 +17,11 @@ useEffect(() => {
 console.log(userData);
     return (
         <>
+    {loading ? (
+    <div className="w-screen flex justify-center">
+    <Loader />
+    </div>
+        ) : (
         <div className="flex-col">
         {userData.map((user) => 
         (
@@ -24,6 +32,7 @@ console.log(userData);
         )
         )}
         </div>
+        )}
         </>
     )
 }
