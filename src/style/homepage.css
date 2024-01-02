@@ -10,3 +10,67 @@ h1 {
     margin-top: 2rem;
     font-size: 3rem;
 }
+
+.book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.bookEgg {
+    border-width: 2px;
+    border-color: black;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 425px;
+    width: 300px;
+    font-family: var(--main);
+}
+
+.clubEgg {
+    border-width: 2px;
+    background-color: white;
+    border-color: black;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 325px;
+    width: 250px;
+    font-family: var(--main);
+    position: absolute;
+    top: 370px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.brothersEgg {
+    border-width: 2px;
+    border-color: black;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 225px;
+    width: 200px;
+    font-family: var(--main);
+    position: absolute;
+    top: 450px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bookEgg:hover,
+.clubEgg:hover,
+.brothersEgg:hover {
+    background-color: black;
+    color: white;
+}

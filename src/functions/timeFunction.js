@@ -21,7 +21,7 @@ if (hourNum > 4 && hourNum < 12) {
 } else if (hourNum > 22 || hourNum < 4){
   return "It's quite late,"
 } else {
-  return "error"
+  return "Howdy"
 }
 }
 

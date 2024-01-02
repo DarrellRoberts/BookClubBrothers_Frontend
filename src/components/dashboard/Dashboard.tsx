@@ -8,7 +8,9 @@ import Loader from "../loader/Loader";
 const Dashboard: React.FC = () => {
 const [userData, setUserData] = useState([]);
 const [bookData, setBookData] = useState([]);
-const [loading, setLoading] = useState(true)
+const [loading, setLoading] = useState(true);
+const [loadingMessage, setLoadingMessage] = useState<string>("")
+
 const { token } = useContext(AuthContext);
 
 const { decodedToken }: { 
@@ -66,17 +68,26 @@ const findUser = userData.find((user) => user._id === id )
     // comments
     const filterComments = bookData.filter((book) => book.commentInfo.commentId.includes(decodedToken._id))
 
+    const Loading = () =>  {
+        const timer = setTimeout(() => {
+        setLoadingMessage("Sorry for the wait...Render wants me to pay money for a faster API-fetch time. Fat chance that is happening.... won't be long now")
+      }, 10000)
+      return () => clearTimeout(timer);
+    }
+
     useEffect(() => {
     getData();
     getBookData();
+    Loading();
 }, [])
 
 console.log(filterComments);
 return (
 <>
 {loading ? (
-    <div className="w-screen flex justify-center">
+    <div className="w-screen h-screen flex justify-center items-center flex-col">
     <Loader />
+    <h2 className="m-5 text-center text-xl">{loadingMessage}</h2>
     </div>
 ) : (
 <>

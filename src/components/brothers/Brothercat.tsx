@@ -4,6 +4,7 @@ import Loader from "../loader/Loader"
 const Brothercat: React.FC = () => {
 const [userData, setUserData] = useState([])
 const [loading, setLoading] = useState(true)
+const [loadingMessage, setLoadingMessage] = useState<string>("")
 
     const getData = async () => {
         const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users`);
@@ -12,14 +13,23 @@ const [loading, setLoading] = useState(true)
         setLoading(false);
     }
 
+    const Loading = () =>  {
+        const timer = setTimeout(() => {
+        setLoadingMessage("Sorry for the wait...Render wants me to pay money for a faster API-fetch time. Fat chance that is happening.... won't be long now")
+      }, 10000)
+      return () => clearTimeout(timer);
+    }
+
 useEffect(() => { 
-    getData()}, [])
+    getData();
+Loading()}, [])
 console.log(userData);
     return (
         <>
     {loading ? (
-    <div className="w-screen flex justify-center">
+    <div className="w-screen h-screen flex justify-center items-center flex-col">
     <Loader />
+    <h2 className="m-5 text-center text-xl">{loadingMessage}</h2>
     </div>
         ) : (
         <div className="flex-col">

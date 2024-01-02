@@ -10,15 +10,30 @@ const Homepage: React.FC = () => {
         </div>
 
         <div className="brothersCon">
-        <Link to="/brothers">
-        <h2>The Brothers</h2>
-        </Link>
+        
+        <div className="book">
 
-        <Link to="/books">
-        <h2>The Books</h2>
-        </Link>
+            <Link to="/books">
+            <div className="bookEgg">
+                <h2 className="mt-5">Book</h2>
+            </div>
+            </Link>
 
-        <h2>The Club</h2>
+
+            <Link to="/about">
+            <div className="clubEgg">
+                <h2 className="mt-5">Club</h2>
+            </div>
+            </Link>
+
+            <Link to="/brothers">
+            <div className="brothersEgg">
+                <h2 className="mt-10">Brothers</h2>
+            </div>
+            </Link>
+
+        </div>
+
         </div>
 
         </>

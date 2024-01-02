@@ -64,7 +64,7 @@ return (
             <>
               <Login />
               <Link to="/">
-              <div className="border-4 border-white border-solid p-3 m-2">
+              <div className="border-4 border-white border-solid pr-5 pl-5 pt-2 pb-2 mr-5 mb-2 mt-2">
                   <h2 className="logo">
                     B
                   </h2>

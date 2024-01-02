@@ -10,5 +10,37 @@
         align-items: center;
         font-size: 2rem;
     }
+
+    .book {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .bookEgg {
+        height: 350px;
+        width: 250px;
+    }
+    
+    .clubEgg {
+        height: 275px;
+        width: 200px;
+        top: 370px;
+    }
+    
+    .brothersEgg {
+        height: 200px;
+        width: 150px;
+        top: 430px;
+    }
+
+    .bookEgg:hover,
+    .clubEgg:hover,
+    .brothersEgg:hover {
+        background-color: black;
+        color: white;
+    }
     
 }
