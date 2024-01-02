@@ -43,4 +43,10 @@
         color: white;
     }
     
+    .bookEgg:active,
+    .clubEgg:active,
+    .brothersEgg:active {
+        background-color: black;
+        color: white;
+    }
 }
