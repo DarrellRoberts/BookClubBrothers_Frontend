@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 
-
 interface props {
   title: string,
   totalScore: number
@@ -8,8 +7,11 @@ interface props {
   raterArr: [string]
 }
 
+type RaterObj = Record<string, number> | [string, number][];
+
 const BookCover: React.FC<props> = ({title, totalScore, ratingArr, raterArr}) => {
-const [users, setUserData] = useState([])
+
+  const [users, setUserData] = useState([])
 
 const getData = async () => {
   const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users`);
@@ -17,23 +19,23 @@ const getData = async () => {
   setUserData(user);
 }
 
-const userObj = {}
-users.forEach(user => {
-userObj[user._id] = user.username 
-})
-
-console.log(userObj)
-
-const raterObj = {}
-const findBookScore = () => {
-for (let i = 0; i < raterArr.length; i++) {
-  raterObj[raterArr[i]] = ratingArr[i]
+const findUser = (id) => {
+const user = users.find(user => user._id === id)
+return user ? user.username : "user not found"
 }
+
+const raterArr2 = raterArr.map((id) => findUser(id))
+
+let raterObj: RaterObj = {}
+const findBookScore = () => {
+for (let i = 0; i < raterArr2.length; i++) {
+  raterObj[raterArr2[i]] = ratingArr[i]
+  findUser(raterObj[raterArr[i]])
+}
+raterObj = Object.entries(raterObj)
 return raterObj
 }
 findBookScore()
-
-console.log(raterObj)
 
 useEffect(() => {
   getData();
@@ -41,15 +43,26 @@ useEffect(() => {
 return (
 <>
 <div className="flex h-[100%] w-[100%]">
-  <div className="leftcover  flex items-center justify-center w-[50%] bg-black text-white">
+  <div className="leftcover  flex flex-col items-center justify-center w-[45%] bg-black text-white">
   <h2>{title}</h2>
+  <h2>(Image pending)</h2>
   </div>
-  <div className="rightcover">
-  <li>name: score</li>
-  <li>name: score</li>
-  <li>name: score</li>
-  <li>name: score</li>
-  <li>Group Rating: {totalScore}</li>
+  <div className="rightcover flex flex-col items-start ml-2">
+  <h2 className="underline">Book Club Brothers</h2>
+
+{Array.isArray(raterObj)
+        ? raterObj.map(([name, value]) => (
+            <li className="list-none mb-1 ml-2" key={name}>
+              {name}: {value}
+            </li>
+          ))
+        : Object.entries(raterObj).map(([name, value]) => (
+            <li className="list-none mb-1 ml-2" key={name}>
+              {name}: {value}
+            </li>
+          ))}
+
+  <li className="list-none mt-auto font-bold">Group Rating: {Math.floor(totalScore * 100) / 100}</li>
   </div>
 </div>
 </>
