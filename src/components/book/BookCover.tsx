@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react"
+import "../../style/bookcover.css"
+import "../../style/bookcoverRes.css"
+
 
 interface props {
   title: string,
@@ -44,11 +47,11 @@ return (
 <>
 <div className="flex h-[100%] w-[100%]">
   <div className="leftcover  flex flex-col items-center justify-center w-[45%] bg-black text-white">
-  <h2>{title}</h2>
-  <h2>(Image pending)</h2>
+  <h2 className="titleCover">{title}</h2>
+  <h2 className="titleCover">(Image pending)</h2>
   </div>
   <div className="rightcover flex flex-col items-start ml-2">
-  <h2 className="underline">Book Club Brothers</h2>
+  <h2 className="underline mb-5">Book Club Brothers</h2>
 
 {Array.isArray(raterObj)
         ? raterObj.map(([name, value]) => (
