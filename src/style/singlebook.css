@@ -1,0 +1,15 @@
+.bookTitle {
+    font-family: var(--main);
+    font-size: 5rem;
+    margin: 1rem;
+}
+
+.bookTitleCon img {
+    width: 600px;
+    height: 400px;
+}
+
+.bookTitleCoverCon {
+    width: 600px;
+    height: 400px;
+}

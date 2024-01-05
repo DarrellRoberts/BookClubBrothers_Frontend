@@ -1,4 +1,4 @@
-h1 {
+.homepageTitle {
     font-family: var(--main);
     font-size: 5rem;
     animation-name: appear;

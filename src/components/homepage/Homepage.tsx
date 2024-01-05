@@ -5,8 +5,8 @@ import { Link } from "react-router-dom"
 const Homepage: React.FC = () => {
     return (
         <>
-        <div className="flex w-screen justify-center mt-10 text-center">
-        <h1>The Book Club Brothers</h1>
+        <div className="flex justify-center mt-10 text-center">
+        <h1 className="homepageTitle">The Book Club Brothers</h1>
         </div>
 
         <div className="brothersCon">

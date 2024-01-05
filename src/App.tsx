@@ -6,9 +6,10 @@ import { useContext } from "react"
 import { AuthContext } from "./context/authContext";
 import { Routes, Route } from "react-router-dom"
 import { useJwt } from "react-jwt";
-import "../src/components/profile/Profilepage"
 import Booklibrary from './components/book/Booklibrary';
 import Brothercat from './components/brothers/Brothercat';
+import SingleBook from './components/book/singleBook/SingleBook';
+
 
 function App() {
   const { token } = useContext(AuthContext);  
@@ -23,6 +24,7 @@ function App() {
       {/* <Route path="/users/:username" element={<Profilepage />} /> */}
       <Route path="/books" element={<Booklibrary />} />
       <Route path="/brothers" element={<Brothercat />} />
+      <Route path="/books/:id" element={<SingleBook />} />
     </Routes>
     </>
   )

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Loader from "../loader/Loader";
 import BookCover from "./BookCover";
+import { Link } from "react-router-dom"
 import "../../style/booklibrary.css"
 import "../../style/booklibraryRes.css"
 
@@ -45,11 +46,15 @@ return (
   {bookData.map((book) => (
     <div key={book.id}>
       {book.reviewImageURL ? (
+    <Link to={`/books/${book._id}`}>
         <img src={book.reviewImageURL} alt="book_review_image" width="" height="" className="border-black border-4 border-black border-solid m-5" />
+        </Link>
       ) : (
+        <Link to={`/books/${book._id}`}>
         <div className="bookCoverCon flex justify-center text-center items-center border-4 m-5 border-black border-solid">
           <BookCover title={book?.title} totalScore={book?.totalScore} ratingArr={book?.scoreRatings?.rating} raterArr={book?.scoreRatings?.raterId} />
         </div>
+        </Link>
       )}
     </div>
   ))}
