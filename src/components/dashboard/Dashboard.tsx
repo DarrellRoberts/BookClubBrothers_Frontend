@@ -85,7 +85,7 @@ console.log(filterComments);
 return (
 <>
 {loading ? (
-    <div className="w-screen h-screen flex justify-center items-center flex-col">
+    <div className="h-screen flex justify-center items-center flex-col">
     <Loader />
     <h2 className="m-5 text-center text-xl">{loadingMessage}</h2>
     </div>

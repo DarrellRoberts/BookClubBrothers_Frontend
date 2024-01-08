@@ -9,6 +9,7 @@ import { useJwt } from "react-jwt";
 import Booklibrary from './components/book/Booklibrary';
 import Brothercat from './components/brothers/Brothercat';
 import SingleBook from './components/book/singleBook/SingleBook';
+import ScrollToTop  from "./functions/ScrollToTop"
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <>
+    <ScrollToTop />
     <Header />
     <Routes>
       <Route path="/" element={username ? <Dashboard /> : <Homepage />} />

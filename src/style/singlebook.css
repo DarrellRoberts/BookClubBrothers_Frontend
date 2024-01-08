@@ -4,7 +4,7 @@
     margin: 1rem;
 }
 
-.bookTitleCon img {
+.bookCover {
     width: 600px;
     height: 400px;
 }
@@ -12,4 +12,12 @@
 .bookTitleCoverCon {
     width: 600px;
     height: 400px;
+}
+
+.bookRightCon {
+    font-family: var(--main);
+    border-width: 2px;
+    border-color: black;
+    padding: 1.5rem 2rem;
+    width: 400px;
 }
