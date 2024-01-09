@@ -30,7 +30,6 @@ interface book {
 const SingleBook: React.FC = () => {
 const [bookData, setBook] = useState<book>()
 const [loading, setLoading] = useState(true)
-const [loadingMessage, setLoadingMessage] = useState("")
 
 const { id } = useParams()
 
@@ -40,18 +39,8 @@ const getBookData = async () => {
     setBook(book);
     setLoading(false)
     }
-
-  const Loading = () =>  {
-      const timer = setTimeout(() => {
-      setLoadingMessage("Sorry for the wait...Render wants me to pay money for a faster API-fetch time. Fat chance that is happening.... won't be long now")
-    }, 10000)
-    return () => clearTimeout(timer);
-  }
-
 useEffect(() => {
         getBookData();
-        
-        Loading();
 }, [])
 
 console.log(bookData)
@@ -60,12 +49,7 @@ return (
 <>
 <Link to="/books"><span className="float-right m-5 font-semibold text-4xl ">Back</span></Link>
 {loading ? (
-  <>
-    <div className="h-screen flex justify-center items-center flex-col">
     <Loader />
-    <h2 className="m-5 text-center text-xl">{loadingMessage}</h2>
-    </div>
-    </>
 ) : (
 <div className="mainSingleCon flex items-center">
 <div className="bookTitleCon flex flex-col">

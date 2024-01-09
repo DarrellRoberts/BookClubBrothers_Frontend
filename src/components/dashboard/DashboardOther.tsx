@@ -1,9 +1,9 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { AuthContext } from "../../context/authContext";
-import { useJwt } from "react-jwt";
 import Loader from "../loader/Loader";
+import { useParams } from "react-router-dom"
 import "../../style/dashboard.css"
+import "../../style/dashboardRes.css"
 
 
 const Dashboard: React.FC = () => {
@@ -11,22 +11,14 @@ const [userData, setUserData] = useState([]);
 const [bookData, setBookData] = useState([]);
 const [loading, setLoading] = useState(true);
 
-const { token } = useContext(AuthContext);
-
-const { decodedToken }: { 
-    decodedToken?: { 
-    username: string,
-     _id: string
-    } 
-} = useJwt(token);
-
 const getData = async () => {
     const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users`);
     const user = await data.json()
     setUserData(user);
 }
-const id: string = decodedToken?._id
-const findUser = userData.find((user) => user._id === id )
+
+const { username } = useParams(); 
+const findUser = userData.find((user) => user.username === username )
 
 // find min score
 // use index in books scored
@@ -54,18 +46,19 @@ const findUser = userData.find((user) => user._id === id )
     const findMinBook = bookData.find((book) => book._id === minScoreBook)
     const findMaxBook = bookData.find((book) => book._id === maxScoreBook)
     
+    console.log(findMaxBook)
         //Additional Stats
     const percentageBooks = parseFloat(((findUser?.userInfo?.books?.score?.length)/(bookData?.length)*100).toFixed(2))
     const averageScore = parseFloat(((findUser?.userInfo?.books?.score?.reduce((a,c) => a + c, 0))/(findUser?.userInfo?.books?.score?.length)).toFixed(2))
 
     // all scores
-    const filterBooks = bookData.filter((book) => book.scoreRatings.raterId.includes(decodedToken._id))
+    const filterBooks = bookData.filter((book) => book.scoreRatings.raterId.includes(findUser?._id))
 
     //unread books
-    const filterUnreadBooks = bookData.filter((book) => !book.scoreRatings.raterId.includes(decodedToken._id))
+    const filterUnreadBooks = bookData.filter((book) => !book.scoreRatings.raterId.includes(findUser?._id))
 
     // comments
-    const filterComments = bookData.filter((book) => book.commentInfo.commentId.includes(decodedToken._id))
+    const filterComments = bookData.filter((book) => book.commentInfo.commentId.includes(findUser?._id))
 
     useEffect(() => {
     getData();
@@ -123,13 +116,12 @@ className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text
 </div>
 </div>
 
-
 <div className="m-10 border-4 border-black p-3 rounded-lg bg-black text-white">
 <h2 className="underline">Books scored</h2>
 <ul>
     {filterBooks.map((book) => (
-        <li className={book?.scoreRatings?.rating[book?.scoreRatings?.raterId.indexOf(decodedToken._id)] >= 5 ? "text-green-500" : "text-red-500"}>
-            {book.title}: {book?.scoreRatings?.rating[book?.scoreRatings?.raterId.indexOf(decodedToken._id)]} </li>
+        <li className={book?.scoreRatings?.rating[book?.scoreRatings?.raterId.indexOf(findUser?._id)] >= 5 ? "text-green-500" : "text-red-500"}>
+            {book.title}: {book?.scoreRatings?.rating[book?.scoreRatings?.raterId.indexOf(findUser?._id)]} </li>
     ))}
 </ul>
 </div>
@@ -157,7 +149,7 @@ Comments
         <li> You have written no comments...boring bastard</li>
         ) : filterComments.map((book) =>
     (
-        <li>{book.title}: "{book.commentInfo.comments[book?.commentInfo?.commentId?.indexOf(decodedToken._id)]}"</li>
+        <li>{book.title}: "{book.commentInfo.comments[book?.commentInfo?.commentId?.indexOf(findUser?._id)]}"</li>
     ))}
 </ul>
 </div>

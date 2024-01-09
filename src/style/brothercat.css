@@ -6,7 +6,7 @@
 }
 
 .brotherBook {
-    width: 800px;
+    width: 700px;
     height: 500px;
     background-color: rgba(244, 236, 8, 0.087);
     font-family: var(--main);
@@ -33,4 +33,13 @@
 
 .brotherBookRight {
     width: 50%;
+}
+
+.brotherList {
+font-size: 1.5rem;
+}
+
+.clickPhoto {
+    text-align: center;
+    padding-right: 20px;
 }

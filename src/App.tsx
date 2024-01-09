@@ -1,6 +1,7 @@
 import './App.css'
 import Header from './components/header/HeaderCon'
 import Dashboard from './components/dashboard/Dashboard';
+import DashboardOther from "./components/dashboard/DashboardOther"
 import Homepage from './components/homepage/Homepage';
 import { useContext } from "react"
 import { AuthContext } from "./context/authContext";
@@ -25,6 +26,7 @@ function App() {
       <Route path="/" element={username ? <Dashboard /> : <Homepage />} />
       {/* <Route path="/users/:username" element={<Profilepage />} /> */}
       <Route path="/books" element={<Booklibrary />} />
+      <Route path="/users/:username" element={<DashboardOther />} />
       <Route path="/brothers" element={<Brothercat />} />
       <Route path="/books/:id" element={<SingleBook />} />
     </Routes>
