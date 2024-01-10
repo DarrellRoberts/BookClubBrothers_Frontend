@@ -4,6 +4,8 @@ The Book-Club Brothers is an exclusive book club formed of old school friends, w
 
 We choose the books as a group, read them and then discuss - either over a warm cup of coffee or ice cold beer.
 
+I finally decided to document our progress on a website with its own database, which is what brought me to this project.
+
 For the Frontend I am using TypeScript with the React library and Tailwind CSS.
 
 I am fetching from my own API which you can view here: https://github.com/DarrellRoberts/BookClubBrothers_Backend-API
