@@ -15,7 +15,7 @@ This is my current project, a work in progress, so stay tuned for more screensho
 Screenshots
 
 **Homescreen**
-![Homescreen](./src/assets/homescreen.jpg)
+![Homescreen](./src/assets/homepage.jpg)
 
 **Secret Quiz on Loading Screen (appears if Render takes too long to fetch the data)**
 ![SecretQuiz](./src/assets/loadingscreen.jpg)
