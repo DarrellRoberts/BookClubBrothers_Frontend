@@ -1,0 +1,9 @@
+.quizCon {
+    border-width: 2px;
+    padding: 1.5rem 2rem;
+    border-color: black;
+    width: 500px;
+    height: 300px;
+    font-size: 1.25rem;
+    font-family: var(--main)
+}

@@ -1,8 +1,10 @@
 import "../../style/loader.css"
 import { useState, useEffect } from "react"
+import Quiz from "./Quiz"
 
 const Loader: React.FC = () => {
     const [loadingMessage, setLoadingMessage] = useState<string>("")
+    const [showQuiz, setShowQuiz] = useState(false)
 
     const Loading = () =>  {
         const timer = 
@@ -13,7 +15,8 @@ const Loader: React.FC = () => {
         setLoadingMessage("..it's been awhile now. This will only happen the first time you load.")    
         }, 25000)
         setTimeout(() => {
-        setLoadingMessage("..alright, it's been 35secs. Here's a quiz to keep you busy.")    
+        setLoadingMessage("..alright, it's been 35secs. Here's a quiz to keep you busy.");
+        setShowQuiz(true)    
         }, 35000)
       return () => clearTimeout(timer);
     }
@@ -22,6 +25,7 @@ const Loader: React.FC = () => {
     Loading()}, [])
     return (
         <div className="h-screen flex justify-center items-center flex-col">
+        {showQuiz ? <Quiz/> : null}
         <span className="loader">
         </span>
         <h2 className="m-5 text-center text-xl">{loadingMessage}</h2>
