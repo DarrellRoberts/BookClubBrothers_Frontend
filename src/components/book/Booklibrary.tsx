@@ -20,7 +20,6 @@ const [loading, setLoading] = useState(true)
     useEffect(() => {
             getBookData();
 }, [])
-// console.log(bookData)    
 return (
 <>
 {loading ? (

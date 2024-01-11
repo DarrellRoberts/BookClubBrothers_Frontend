@@ -10,7 +10,17 @@ For the Frontend I am using TypeScript with the React library and Tailwind CSS.
 
 I am fetching from my own API which you can view here: https://github.com/DarrellRoberts/BookClubBrothers_Backend-API
 
-This is my current project so stay tuned for screenshots and more!
+This is my current project, a work in progress, so stay tuned for more screenshots and more!
+
+Screenshots
+
+**Homescreen**
+![Homescreen](./src/assets/homescreen.jpg)
+
+**Secret Quiz on Loading Screen (appears if Render takes too long to fetch the data)**
+![SecretQuiz](./src/assets/loadingscreen.jpg)
+
+![SecretQuiz](./src/assets/loadingscreen2.jpg)
 
 Cheers,
 
