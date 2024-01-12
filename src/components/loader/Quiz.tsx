@@ -94,7 +94,7 @@ const quiz = {
         !showCorrect ? (
         <>
         <li
-        className="cursor-pointer list-decimal"
+        className="cursor-pointer list-disc hover:bg-black hover:text-white"
         onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
             const target = e.target as HTMLLIElement;
             const clickedOption = target.textContent;
@@ -112,7 +112,7 @@ const quiz = {
         )
     : (
         <li
-        className={option === quiz?.quiz[index].correctAnswer ? "text-green-500 font-bold list-decimal" : "text-red-500"}
+        className={option === quiz?.quiz[index].correctAnswer ? "text-green-500 font-bold list-disc" : "text-red-500"}
         >
         {option}
         </li>

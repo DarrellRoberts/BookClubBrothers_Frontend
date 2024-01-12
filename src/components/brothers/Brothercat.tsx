@@ -60,7 +60,7 @@ useEffect(() => {
                 
                 <div className="brotherBookLeft flex flex-col justify-evenly items-center">
                 <h2 className="text-black underline">{user?.username}</h2>
-                <Link to={`/users/${user.username}`}>
+                <Link to={`/brothers/${user.username}`}>
                     <img
                     className="opacity-60" 
                     src={user?.userInfo?.profileURL} 

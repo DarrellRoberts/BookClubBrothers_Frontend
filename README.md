@@ -15,12 +15,12 @@ This is my current project, a work in progress, so stay tuned for more screensho
 Screenshots
 
 **Homescreen**
-![Homescreen](./src/assets/homepage.jpg)
+![Homescreen](./src/assets/readme/homepage.jpg)
 
 **Secret Quiz on Loading Screen (appears if Render takes too long to fetch the data)**
-![SecretQuiz](./src/assets/loadingscreen.jpg)
+![SecretQuiz](./src/assets/readme/loadingscreen.jpg)
 
-![SecretQuiz](./src/assets/loadingscreen2.jpg)
+![SecretQuiz](./src/assets/readme/loadingscreen2.jpg)
 
 Cheers,
 

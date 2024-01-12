@@ -1,3 +1,7 @@
+.bookCon {
+    margin-top: 1rem;
+}
+
 .bookCon img {
     width: 400px;
     height: 250px;
@@ -6,4 +10,12 @@
 .bookCoverCon {
     width: 400px;
     height: 250px;
+}
+
+.smallBookTitle {
+    font-family: var(--main);
+    font-size: 2rem;
+    font-weight:bolder;
+    text-align: center;
+    text-decoration: underline;
 }

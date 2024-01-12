@@ -11,6 +11,7 @@ import Booklibrary from './components/book/Booklibrary';
 import Brothercat from './components/brothers/Brothercat';
 import SingleBook from './components/book/singleBook/SingleBook';
 import ScrollToTop  from "./functions/ScrollToTop"
+import Club from './components/club/Club';
 
 
 function App() {
@@ -26,9 +27,10 @@ function App() {
       <Route path="/" element={username ? <Dashboard /> : <Homepage />} />
       {/* <Route path="/users/:username" element={<Profilepage />} /> */}
       <Route path="/books" element={<Booklibrary />} />
-      <Route path="/users/:username" element={<DashboardOther />} />
+      <Route path="/brothers/:username" element={<DashboardOther />} />
       <Route path="/brothers" element={<Brothercat />} />
       <Route path="/books/:id" element={<SingleBook />} />
+      <Route path="/club" element={<Club />} />
     </Routes>
     </>
   )

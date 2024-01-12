@@ -1,6 +1,7 @@
 @media screen and (max-width: 800px) {
     .bookCon {
         justify-content: center;
+        margin-top: 1rem;
     }
     .bookCon img {
         width: 300px;
@@ -9,5 +10,9 @@
     .bookCoverCon {
         width: 300px;
         height: 200px;
+    }
+    .smallBookTitle {
+        font-size: 1.75rem;
+        text-decoration: overline;
     }
 }

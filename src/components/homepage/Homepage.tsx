@@ -20,7 +20,7 @@ const Homepage: React.FC = () => {
             </Link>
 
 
-            <Link to="/about">
+            <Link to="/club">
             <div className="clubEgg">
                 <h2 className="mt-5">Club</h2>
             </div>
