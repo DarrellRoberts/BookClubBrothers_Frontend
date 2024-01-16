@@ -44,7 +44,7 @@ const Booklibrary: React.FC = () => {
                   />
                 </Link>
               ) : (
-                <Link to={`/books/library${book._id}`}>
+                <Link to={`/books/library/${book._id}`}>
                   <h2 className="smallBookTitle">{book.title}</h2>
                   <div className="bookCoverCon flex justify-center text-center items-center border-4 m-5 border-black border-solid">
                     <BookCover
