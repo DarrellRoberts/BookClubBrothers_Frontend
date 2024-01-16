@@ -13,6 +13,7 @@ import SingleBook from "./components/book/singleBook/SingleBook";
 import ScrollToTop from "./functions/ScrollToTop";
 import Club from "./components/club/Club";
 import BookHomepage from "./components/book/BookHomepage";
+import Quiz from "./components/book/bookquiz/Quiz";
 
 function App() {
   const { token } = useContext(AuthContext);
@@ -26,12 +27,15 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={username ? <Dashboard /> : <Homepage />} />
-        {/* <Route path="/users/:username" element={<Profilepage />} /> */}
+
         <Route path="/books" element={<BookHomepage />} />
         <Route path="/books/library" element={<Booklibrary />} />
-        <Route path="/brothers/:username" element={<DashboardOther />} />
-        <Route path="/brothers" element={<Brothercat />} />
+        <Route path="/books/quiz" element={<Quiz />} />
         <Route path="/books/library/:id" element={<SingleBook />} />
+
+        <Route path="/brothers" element={<Brothercat />} />
+        <Route path="/brothers/:username" element={<DashboardOther />} />
+
         <Route path="/club" element={<Club />} />
       </Routes>
     </>

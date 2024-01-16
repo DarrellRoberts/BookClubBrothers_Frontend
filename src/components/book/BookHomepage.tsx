@@ -15,6 +15,12 @@ className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text
 >
 <Link to="/books/randomiser"><h2>Book Randomiser</h2></Link>
 </div>
+
+<div 
+className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text-white"
+>
+<Link to="/books/quiz"><h2>Quiz</h2></Link>
+</div>
 </div>
 </>
 )
