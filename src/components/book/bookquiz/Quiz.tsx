@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import "../../../style/quiz.css"
 import "../../../style/quizRes.css"
 
@@ -77,7 +78,10 @@ const Quiz: React.FC = () => {
     
         return (
     <>
-    <div className="bookQuizCon flex flex-col items-center mt-5">
+    <Link to="/books">
+    <span className="float-right m-5 font-semibold text-4xl ">Back</span>
+    </Link>
+    <div className="bookQuizCon flex flex-col items-center mt-20">
     <h1 className="underline">Quiz</h1>
     <div className="quizTitle flex mb-5">
     <h2>{index <= 11 ? `Question: ${index + 1}/${quiz.quiz.length - 1}`: null}</h2>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const BookHomepage: React.FC = () => {
 return (
 <>
-<div className="flex">
+<div className="flex flex-wrap">
 <div 
 className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text-white"
 >
