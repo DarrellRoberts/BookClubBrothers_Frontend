@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import "../../style/bookcover.css"
-import "../../style/bookcoverRes.css"
+import "../../../style/bookcover.css"
+import "../../../style/bookcoverRes.css"
 
 
 interface props {
