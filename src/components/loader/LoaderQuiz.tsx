@@ -80,7 +80,7 @@ const quiz = {
 
     return (
 <>
-<div className="quizCon flex flex-col absolute top-28 mt-5">
+<div className="quizCon flex flex-col top-28 mt-5 mb-5">
 
 <div className="quizTitle flex justify-between mb-5">
 <h1 className="underline">Quiz</h1>
