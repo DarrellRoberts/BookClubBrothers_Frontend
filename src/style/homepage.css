@@ -54,7 +54,7 @@
     font-family: var(--main);
     position: absolute;
     top: 370px;
-    left: 50%;
+    /* left: 50%; */
     transform: translateX(-50%);
     animation-name: appear;
     animation-duration: 2s;
@@ -76,7 +76,7 @@
     font-family: var(--main);
     position: absolute;
     top: 450px;
-    left: 50%;
+    /* left: 50%; */
     transform: translateX(-50%);
     animation-name: appear;
     animation-duration: 3s;
