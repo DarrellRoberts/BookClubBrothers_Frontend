@@ -50,13 +50,12 @@
     }
 }
 
-@media screen and (max-width: 490px) {
+@media screen and (max-width: 475px) {
     .clubEgg {
         top: 370px;
     }
     
     .brothersEgg {
-
         top: 435px;
     }
 }
