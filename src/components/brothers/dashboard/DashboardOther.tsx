@@ -96,6 +96,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
+    <Link to="/brothers">
+    <span className="float-right m-5 font-semibold text-4xl ">Back</span>
+    </Link>
       {loading ? (
         <Loader />
       ) : (

@@ -3,6 +3,7 @@ import Meeting2 from "../../assets/clubimages/meeting2.jpg"
 import Meeting3 from "../../assets/clubimages/meeting3.jpg"
 import BerlinMeet1 from "../../assets/clubimages/berlinMeet1.jpg"
 import BerlinMeet2 from "../../assets/clubimages/berlinMeet2.jpg"
+import { Link } from "react-router-dom"
 import "../../style/club.css"
 import "../../style/clubRes.css"
 
@@ -10,6 +11,9 @@ import "../../style/clubRes.css"
 const Club: React.FC = () => {
     return (
         <>
+    <Link to="/">
+    <span className="float-right m-5 font-semibold text-4xl ">Back</span>
+      </Link>
         <div className="clubGridCon flex justify-center ml-10 mt-10">
     <div className="clubGrid">
         <img className="clubImage1" src={Meeting1} alt="clubmeeting1" />

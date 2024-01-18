@@ -48,6 +48,9 @@ useEffect(() => {
     getBook()}, [])
     return (
         <>
+                  <Link to="/">
+        <span className="float-right m-5 font-semibold text-4xl ">Back</span>
+      </Link>
     {loading ? (
     <Loader />
         ) : (
