@@ -1,16 +1,29 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import { DoubleLeftOutlined } from "@ant-design/icons"
+import { Button } from "antd"
 import Loader from "../loader/Loader"
+import { AuthContext } from "../../context/authContext";
+import { useJwt } from "react-jwt";
+import PictureUpload from "./brotherform/PictureUpload";
 import "../../style/brothercat.css"
 import "../../style/brothercatRes.css"
 
-
-
 const Brothercat: React.FC = () => {
+//extracting username from jwt Token    
+const { token } = useContext(AuthContext);
+const {decodedToken}: {
+    decodedToken?: {
+      username: string;
+      _id: string;
+    };
+  } = useJwt(token);
+const userName = decodedToken?.username
+
 const [userData, setUserData] = useState([])
 const [bookData, setBookData] = useState([])
-const [loading, setLoading] = useState(true)
+const [editImage, setEditImage] = useState<boolean>(false);
+const [loading, setLoading] = useState<boolean>(true)
 
     const getData = async () => {
         const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users`);
@@ -57,18 +70,41 @@ useEffect(() => {
         <>
         <h1 className="brothersTitle">The Brothers</h1>
         <div className="flex flex-col items-center">
-        {userData.map((user) => 
+        {userData.map((user, index) => 
         (
 
-            <div className="brotherBook border-black border-4 border-solid m-5 flex">
+            <div key={index} className="brotherBook border-black border-4 border-solid m-5 flex">
                 
                 <div className="brotherBookLeft flex flex-col justify-evenly items-center">
                 <h2 className="text-black underline">{user?.username}</h2>
                 <Link to={`/brothers/${user.username}`}>
                     <img
-                    className="opacity-60" 
+                    className="opacity-60 grayscale"
                     src={user?.userInfo?.profileURL} 
                     alt="profile_pic" /></Link>
+                {userName === user?.username ?
+                    editImage ?
+                    <>
+                    <div className="absolute">
+                    <div className="flex flex-col items-center justify-center">
+                    <Button
+                    type="primary"
+                    className="bg-black"
+                    onClick={() => setEditImage(false)}
+                    >X</Button>
+                    <PictureUpload id = {user?._id} setEditImage={setEditImage} /> 
+                    </div>
+                    </div>
+                    </> 
+                    :
+                    (
+                    <div className="flex">
+                    <Button
+                    className="bg-black text-white" 
+                    onClick={() => setEditImage(true)}>Change image
+                    </Button>
+                    </div>
+                ) : null}
                 </div>
 
                 <div className="brotherBookRight flex flex-col pl-10 pt-5">
