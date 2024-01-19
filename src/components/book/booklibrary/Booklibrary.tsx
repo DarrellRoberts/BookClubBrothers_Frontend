@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Loader from "../../loader/Loader";
 import BookCover from "./BookCover";
 import { Link } from "react-router-dom";
+import Back from "../../misc/Back";
 import "../../../style/booklibrary.css";
 import "../../../style/booklibraryRes.css";
 
@@ -23,9 +24,7 @@ const Booklibrary: React.FC = () => {
   }, []);
   return (
     <>
-          <Link to="/books">
-        <span className="float-right m-5 font-semibold text-4xl ">Back</span>
-      </Link>
+    <Back />
       {loading ? (
         <Loader />
       ) : (

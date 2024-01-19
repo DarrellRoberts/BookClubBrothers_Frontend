@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Loader from "../../loader/Loader";
 import BookCover from "../booklibrary/BookCover.js";
 import "../../../style/singlebook.css";
 import { dateFormatter } from "../../../functions/dateFormatter.js";
+import Back from "../../misc/Back.js";
 import "../../../style/singlebookRes.css";
 
 interface book {
@@ -49,9 +49,7 @@ const SingleBook: React.FC = () => {
 
   return (
     <>
-      <Link to="/books/library">
-        <span className="float-right m-5 font-semibold text-4xl ">Back</span>
-      </Link>
+<Back />
       {loading ? (
         <Loader />
       ) : (

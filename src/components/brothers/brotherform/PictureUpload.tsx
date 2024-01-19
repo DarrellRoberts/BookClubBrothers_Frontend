@@ -75,6 +75,7 @@ const PictureUpload: React.FC<props> = ({id, setEditImage  }) => {
         const newLoadings = [...prevLoadings];
         newLoadings[index] = false;
         setEditImage(false)
+        document.location.reload();
         return newLoadings;
       });
     }, 2000);

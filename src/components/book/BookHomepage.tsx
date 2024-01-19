@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom"
+import Back from "../misc/Back"
+import "../../style/bookHomepage.css"
+import "../../style/bookHomepageRes.css"
+
 
 const BookHomepage: React.FC = () => {
 return (
 <>
-<Link to="/">
-        <span className="float-right m-5 font-semibold text-4xl ">Back</span>
-      </Link>
-<div className="flex flex-wrap">
+
+<Back />
+<h1  className="brothersTitle">The Books</h1>
+<div className="flex justify-center ">
+<div className="bookHomeGrid">
 <div 
 className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text-white"
 >
@@ -23,6 +28,13 @@ className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text
 className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text-white"
 >
 <Link to="/books/quiz"><h2>Quiz</h2></Link>
+</div>
+
+<div 
+className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text-white"
+>
+<Link to="/books/stats"><h2>Book Stats</h2></Link>
+</div>
 </div>
 </div>
 </>

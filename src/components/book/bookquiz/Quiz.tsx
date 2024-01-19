@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import Back from "../../misc/Back"
 import "../../../style/quiz.css"
 import "../../../style/quizRes.css"
 
@@ -78,9 +78,7 @@ const Quiz: React.FC = () => {
     
         return (
     <>
-    <Link to="/books">
-    <span className="float-right m-5 font-semibold text-4xl ">Back</span>
-    </Link>
+    <Back />
     <div className="bookQuizCon flex flex-col items-center mt-20">
     <h1 className="underline">Quiz</h1>
     <div className="quizTitle flex mb-5">

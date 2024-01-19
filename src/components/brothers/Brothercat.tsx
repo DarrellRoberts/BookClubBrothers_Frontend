@@ -6,11 +6,11 @@ import Loader from "../loader/Loader"
 import { AuthContext } from "../../context/authContext";
 import { useJwt } from "react-jwt";
 import PictureUpload from "./brotherform/PictureUpload";
+import Back from "../misc/Back"
 import "../../style/brothercat.css"
 import "../../style/brothercatRes.css"
 
-const Brothercat: React.FC = () => {
-//extracting username from jwt Token    
+const Brothercat: React.FC = () => {   
 const { token } = useContext(AuthContext);
 const {decodedToken}: {
     decodedToken?: {
@@ -61,9 +61,7 @@ useEffect(() => {
     getBook()}, [])
     return (
         <>
-                  <Link to="/">
-        <span className="float-right m-5 font-semibold text-4xl ">Back</span>
-      </Link>
+        <Back />
     {loading ? (
     <Loader />
         ) : (
