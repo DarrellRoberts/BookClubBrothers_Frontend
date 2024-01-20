@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/authContext";
 import { useJwt } from "react-jwt";
 import PictureUpload from "./brotherform/PictureUpload";
 import Back from "../misc/Back"
+import Search from "../misc/Search"
 import "../../style/brothercat.css"
 import "../../style/brothercatRes.css"
 
@@ -24,12 +25,20 @@ const [userData, setUserData] = useState([])
 const [bookData, setBookData] = useState([])
 const [editImage, setEditImage] = useState<boolean>(false);
 const [loading, setLoading] = useState<boolean>(true)
+const [searchBar, setSearchBar] = useState("");
 
     const getData = async () => {
-        const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users`);
+        if (searchBar) {
+        const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users/${searchBar}`);
         const user = await data.json()
         setUserData(user);
         setLoading(false);
+        } else {
+        const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users`);
+        const user = await data.json()
+        setUserData(user);
+        setLoading(false);   
+        }
     }
 
     const getBook = async () => {
@@ -59,16 +68,25 @@ const [loading, setLoading] = useState<boolean>(true)
 useEffect(() => { 
     getData();
     getBook()}, [])
+
+const filteredResults = Array.isArray(userData)
+? userData?.filter((user) => user.username.includes(searchBar))
+: ["No results"];
+
     return (
         <>
-        <Back />
+    <div className="searchBackCon">
+    <Search setSearchBar={setSearchBar} />
+    <Back />
+    </div>
     {loading ? (
     <Loader />
         ) : (
         <>
         <h1 className="brothersTitle">The Brothers</h1>
         <div className="flex flex-col items-center">
-        {userData.map((user, index) => 
+        {filteredResults.length > 0 ?
+        filteredResults.map((user, index) => 
         (
 
             <div key={index} className="brotherBook border-black border-4 border-solid m-5 flex">
@@ -136,6 +154,9 @@ useEffect(() => {
                 </div>
             </div>
         )
+        )
+        : (
+            <p>Brother not found. Click on search to refresh.</p>
         )}
         </div>
         </>
