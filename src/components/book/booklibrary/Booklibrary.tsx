@@ -40,8 +40,6 @@ const Booklibrary: React.FC = () => {
       ? bookData?.filter((book) => book.title.includes(searchBar))
       : ["No results"];
 
-
-console.log(filteredResults)
   return (
     <>
     <div className="searchBackCon">
