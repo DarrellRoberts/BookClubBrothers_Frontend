@@ -7,8 +7,8 @@ import Back from "../../misc/Back.js";
 import DeleteBook from "../booklibrary/bookform/DeleteBook.js";
 import { AuthContext } from "../../../context/authContext.js";
 import { useJwt } from "react-jwt";
-import "../../../style/singlebookRes.css";
 import "../../../style/singlebook.css";
+import "../../../style/singlebookRes.css";
 
 interface book {
   author: string;
@@ -72,7 +72,7 @@ const SingleBook: React.FC = () => {
                   alt="book_review_image"
                   width=""
                   height=""
-                  className=" bookCover border-black border-4 border-black border-solid m-5"
+                  className="bookCover border-black border-4 border-black border-solid m-5"
                 />
               ) : (
                 <div className="bookTitleCoverCon flex justify-center text-center items-center border-4 m-5 border-black border-solid">
