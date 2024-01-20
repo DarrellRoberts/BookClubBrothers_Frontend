@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../../loader/Loader";
 import BookCover from "../booklibrary/BookCover.js";
-import "../../../style/singlebook.css";
 import { dateFormatter } from "../../../functions/dateFormatter.js";
 import Back from "../../misc/Back.js";
+import DeleteBook from "../booklibrary/bookform/DeleteBook.js";
+import { AuthContext } from "../../../context/authContext.js";
+import { useJwt } from "react-jwt";
 import "../../../style/singlebookRes.css";
+import "../../../style/singlebook.css";
 
 interface book {
   author: string;
@@ -30,7 +33,9 @@ interface book {
 const SingleBook: React.FC = () => {
   const [bookData, setBook] = useState<book>();
   const [loading, setLoading] = useState(true);
-
+  const [showDelete, setShowDelete] = useState(false)
+  const { token } = useContext(AuthContext);
+  const { decodedToken }: { decodedToken?: { username: string} } = useJwt(token);
   const { id } = useParams();
 
   const getBookData = async () => {
@@ -50,11 +55,15 @@ const SingleBook: React.FC = () => {
   return (
     <>
 <Back />
-      {loading ? (
+{showDelete ? (
+  <h1 className="bookTitle flex justify-center items-center h-screen text-center">Book is deleted</h1>
+) :
+      loading ? (
         <Loader />
       ) : (
         <div className="mainSingleCon flex items-center">
           <div className="bookTitleCon flex flex-col">
+          {decodedToken ? (<DeleteBook id={id} setShowDelete={setShowDelete}/>) : null}
             <h1 className="bookTitle">{bookData.title}</h1>
             <div>
               {bookData?.reviewImageURL ? (

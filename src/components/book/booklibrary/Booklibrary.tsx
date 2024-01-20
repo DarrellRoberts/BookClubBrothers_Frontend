@@ -4,6 +4,8 @@ import BookCover from "./BookCover";
 import { Link } from "react-router-dom";
 import Back from "../../misc/Back";
 import Search from "../../misc/Search";
+import CreateBook from "./bookform/CreateBook";
+import {Button} from "antd";
 import "../../../style/booklibrary.css";
 import "../../../style/booklibraryRes.css";
 import "../../../style/search.css";
@@ -13,6 +15,8 @@ const Booklibrary: React.FC = () => {
   const [bookData, setBookData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchBar, setSearchBar] = useState(""); 
+  const [showCreateBook, setShowCreateBook] = useState(false)
+
 
   const getBookData = async () => {
     if (searchBar) {
@@ -89,6 +93,15 @@ const Booklibrary: React.FC = () => {
           )}
         </div>
       )}
+                <div className="addBookCon">
+          <Button
+          onClick={() => setShowCreateBook(true)}>
+          Add book
+          </Button>
+          {showCreateBook ? (
+          <CreateBook setShowCreateBook={setShowCreateBook} showCreateBook={showCreateBook}/>
+          ) : null}
+          </div>
     </>
   );
 };
