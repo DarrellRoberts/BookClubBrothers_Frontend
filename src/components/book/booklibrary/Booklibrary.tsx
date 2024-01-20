@@ -3,33 +3,60 @@ import Loader from "../../loader/Loader";
 import BookCover from "./BookCover";
 import { Link } from "react-router-dom";
 import Back from "../../misc/Back";
+import Search from "../../misc/Search";
 import "../../../style/booklibrary.css";
 import "../../../style/booklibraryRes.css";
+import "../../../style/search.css";
+import "../../../style/searchRes.css";
 
 const Booklibrary: React.FC = () => {
   const [bookData, setBookData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchBar, setSearchBar] = useState(""); 
 
   const getBookData = async () => {
+    if (searchBar) {
     const data = await fetch(
-      `https://bookclubbrothers-backend.onrender.com/books`
+      `https://bookclubbrothers-backend.onrender.com/books/title/${searchBar}`
     );
     const book = await data.json();
     setBookData(book);
     setLoading(false);
+    } else {
+    const data = await fetch(
+        `https://bookclubbrothers-backend.onrender.com/books`
+    );
+    const book = await data.json();
+    setBookData(book);
+    setLoading(false);
+    }
   };
 
   useEffect(() => {
     getBookData();
   }, []);
+ 
+  const filteredResults = Array.isArray(bookData)
+      ? bookData?.filter((book) => book.title.includes(searchBar))
+      : ["No results"];
+
+
+console.log(filteredResults)
   return (
     <>
+    <div className="searchBackCon">
+    <Search setSearchBar={setSearchBar} />
     <Back />
-      {loading ? (
+    </div>
+    <h1 className="bookLibraryTitle">Book Library</h1>
+      {loading && bookData.length <= 0 ? (
         <Loader />
       ) : (
         <div className="bookCon flex flex-wrap">
-          {bookData.map((book) => (
+          {Array.isArray(bookData) ? 
+          filteredResults.length > 0 ?
+          (
+          filteredResults?.map((book) => (
             <div key={book.id}>
               {book.reviewImageURL ? (
                 <Link to={`/books/library/${book._id}`}>
@@ -56,7 +83,12 @@ const Booklibrary: React.FC = () => {
                 </Link>
               )}
             </div>
-          ))}
+          ))
+          ) : (
+            <p className="text-center w-screen">No books found. Press search again to refresh.</p>
+          ) : (
+            <p className="text-center w-screen">No books found. Press search again to refresh.</p>
+          )}
         </div>
       )}
     </>
