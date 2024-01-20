@@ -1,4 +1,10 @@
 @media screen and (max-width: 800px) {
+    .bookLibraryTitle {
+        font-size: 3.5rem;
+    }
+    .searchBackCon {
+        display: flex;
+    }
     .bookCon {
         justify-content: center;
         margin-top: 1rem;

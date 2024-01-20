@@ -7,7 +7,6 @@ import "../../style/bookHomepageRes.css"
 const BookHomepage: React.FC = () => {
 return (
 <>
-
 <Back />
 <h1  className="brothersTitle">The Books</h1>
 <div className="flex justify-center ">

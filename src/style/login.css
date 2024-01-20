@@ -1,9 +1,9 @@
 :where(.css-dev-only-do-not-override-gzal6t).ant-modal .ant-modal-content {
-    background-color: rgb(9, 93, 9);
+    background-color: var(--tertiaryColor);
 }
 
 :where(.css-dev-only-do-not-override-gzal6t).ant-modal .ant-modal-title {
-    background-color: rgb(9, 93, 9);
+    background-color: var(--tertiaryColor);
 }
 
 :where(.css-dev-only-do-not-override-gzal6t).ant-btn-primary.ant-btn-background-ghost {
@@ -25,11 +25,12 @@
 
 /* deployed version */
 :where(.css-gzal6t).ant-modal .ant-modal-content {
-    background-color: rgb(9, 93, 9);
+    background-color: var(--tertiaryColor);
+
 }
 
 :where(.css-gzal6t).ant-modal .ant-modal-title {
-    background-color: rgb(9, 93, 9);
+    background-color: var(--tertiaryColor);
 }
 
 :where(.css-gzal6t).ant-btn-primary.ant-btn-background-ghost {
