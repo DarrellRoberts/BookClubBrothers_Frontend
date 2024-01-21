@@ -5,6 +5,7 @@ import BookCover from "../booklibrary/BookCover.js";
 import { dateFormatter } from "../../../functions/dateFormatter.js";
 import Back from "../../misc/Back.js";
 import DeleteBook from "../booklibrary/bookform/DeleteBook.js";
+import RatingCon from "./RatingCon.js";
 import { AuthContext } from "../../../context/authContext.js";
 import { useJwt } from "react-jwt";
 import "../../../style/singlebook.css";
@@ -132,6 +133,7 @@ const SingleBook: React.FC = () => {
           </div>
         </div>
       )}
+      <RatingCon bookData={bookData} id={id}/>
     </>
   );
 };

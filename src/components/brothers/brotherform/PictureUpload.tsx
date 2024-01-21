@@ -78,7 +78,7 @@ const PictureUpload: React.FC<props> = ({id, setEditImage  }) => {
         document.location.reload();
         return newLoadings;
       });
-    }, 2000);
+    }, 4000);
   };
 
   return (
