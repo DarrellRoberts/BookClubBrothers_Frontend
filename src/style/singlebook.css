@@ -51,7 +51,7 @@
 
 .authorisationMessage {
     font-weight: bold;
-    background-color: var(--tertiaryColor);
+    background-color: red;
     margin-top: 0.5rem;
     padding: 2rem;
     color: white;
