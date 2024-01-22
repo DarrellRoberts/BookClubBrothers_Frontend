@@ -9,6 +9,7 @@ const Dashboard: React.FC = () => {
   const [userData, setUserData] = useState([]);
   const [bookData, setBookData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const { token } = useContext(AuthContext);
 
@@ -22,11 +23,16 @@ const Dashboard: React.FC = () => {
   } = useJwt(token);
 
   const getData = async () => {
+    try {
     const data = await fetch(
       `https://bookclubbrothers-backend.onrender.com/users`
     );
     const user = await data.json();
     setUserData(user);
+    } catch (err) {
+      setError(err)
+      console.log(error)
+    }
   };
   const id: string = decodedToken?._id;
   const findUser = userData.find((user) => user._id === id);
@@ -58,12 +64,17 @@ const Dashboard: React.FC = () => {
   const maxScoreBook = findUser?.userInfo?.books?.booksScored[maxScoreIndex];
 
   const getBookData = async () => {
+    try {
     const data = await fetch(
       `https://bookclubbrothers-backend.onrender.com/books`
     );
     const book = await data.json();
     setBookData(book);
     setLoading(false);
+    } catch (err) {
+      setError(err)
+      console.log(err)
+    }
   };
 
   const findMinBook = bookData.find((book) => book._id === minScoreBook);

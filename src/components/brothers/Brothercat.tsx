@@ -26,8 +26,10 @@ const [bookData, setBookData] = useState([])
 const [editImage, setEditImage] = useState<boolean>(false);
 const [loading, setLoading] = useState<boolean>(true)
 const [searchBar, setSearchBar] = useState("");
+const [error, setError] = useState("")
 
     const getData = async () => {
+        try {
         if (searchBar) {
         const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users/${searchBar}`);
         const user = await data.json()
@@ -39,6 +41,10 @@ const [searchBar, setSearchBar] = useState("");
         setUserData(user);
         setLoading(false);   
         }
+    } catch (err) {
+        setError(err)
+        console.log(error)
+    }
     }
 
     const getBook = async () => {

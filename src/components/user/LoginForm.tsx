@@ -14,8 +14,8 @@ const LoginForm: React.FC<Login> = ({setLoginOpen}) => {
   const { login, token } = useContext(AuthContext);
 
   const handleSubmit = async () => {
+    try {
     setError(null);
-
     const response = await fetch("https://bookclubbrothers-backend.onrender.com/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -38,6 +38,10 @@ const LoginForm: React.FC<Login> = ({setLoginOpen}) => {
       setLoginOpen(false)
     }, 5000);
     }
+  } catch(err) {
+    setError(err)
+    console.log(error)
+  }
   };
   const enterLoading = (index: number) => {
     setLoadings((prevLoadings) => {

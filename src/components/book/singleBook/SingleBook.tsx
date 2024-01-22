@@ -35,17 +35,25 @@ const SingleBook: React.FC = () => {
   const [bookData, setBook] = useState<book>();
   const [loading, setLoading] = useState(true);
   const [showDelete, setShowDelete] = useState(false)
+  const [error, setError] = useState("")
+
+
   const { token } = useContext(AuthContext);
   const { decodedToken }: { decodedToken?: { username: string} } = useJwt(token);
   const { id } = useParams();
 
   const getBookData = async () => {
+    try {
     const data = await fetch(
       `https://bookclubbrothers-backend.onrender.com/books/${id}`
     );
     const book = await data.json();
     setBook(book);
     setLoading(false);
+} catch (err) {
+  setError(err)
+  console.log(error)
+}
   };
   useEffect(() => {
     getBookData();

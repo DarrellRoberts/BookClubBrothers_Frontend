@@ -9,13 +9,19 @@ const Dashboard: React.FC = () => {
   const [userData, setUserData] = useState([]);
   const [bookData, setBookData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const getData = async () => {
+    try {
     const data = await fetch(
       `https://bookclubbrothers-backend.onrender.com/users`
     );
     const user = await data.json();
     setUserData(user);
+    } catch (err) {
+      setError(err)
+      console.log(error)
+    }
   };
 
   const { username } = useParams();
@@ -48,18 +54,22 @@ const Dashboard: React.FC = () => {
   const maxScoreBook = findUser?.userInfo?.books?.booksScored[maxScoreIndex];
 
   const getBookData = async () => {
+    try {
     const data = await fetch(
       `https://bookclubbrothers-backend.onrender.com/books`
     );
     const book = await data.json();
     setBookData(book);
     setLoading(false);
+    } catch (err) {
+      setError(err)
+      console.log(error)
+    }
   };
 
   const findMinBook = bookData.find((book) => book._id === minScoreBook);
   const findMaxBook = bookData.find((book) => book._id === maxScoreBook);
 
-  console.log(findMaxBook);
   //Additional Stats
   const percentageBooks = parseFloat(
     (

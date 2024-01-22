@@ -14,12 +14,15 @@ import "../../../style/searchRes.css";
 const Booklibrary: React.FC = () => {
   const [bookData, setBookData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("")
   const [searchBar, setSearchBar] = useState(""); 
   const [showCreateBook, setShowCreateBook] = useState(false)
 
 
   const getBookData = async () => {
+    try {
     if (searchBar) {
+    setError(null)
     const data = await fetch(
       `https://bookclubbrothers-backend.onrender.com/books/title/${searchBar}`
     );
@@ -34,6 +37,10 @@ const Booklibrary: React.FC = () => {
     setBookData(book);
     setLoading(false);
     }
+  } catch (err) {
+    setError(err)
+    console.log(error)
+  }
   };
 
   useEffect(() => {

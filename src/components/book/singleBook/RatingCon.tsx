@@ -31,11 +31,17 @@ const RatingCon:React.FC<book> = ({bookData, id}) => {
 
     const [users, setUserData] = useState([])
     const [showRating, setShowRating] = useState<boolean>(false)
+    const [error, setError] = useState("")
 
     const getData = async () => {
+      try {
       const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users`);
       const user = await data.json()
       setUserData(user);
+      } catch (err) {
+        setError(err)
+        console.log(error)
+      }
     }
     
     const findUser = (id) => {

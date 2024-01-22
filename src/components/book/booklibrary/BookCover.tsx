@@ -15,11 +15,17 @@ type RaterObj = Record<string, number> | [string, number][];
 const BookCover: React.FC<props> = ({title, totalScore, ratingArr, raterArr}) => {
 
   const [users, setUserData] = useState([])
+  const [error, setError] = useState("")
 
 const getData = async () => {
+  try {
   const data = await fetch(`https://bookclubbrothers-backend.onrender.com/users`);
   const user = await data.json()
   setUserData(user);
+  } catch(err) {
+    setError(err)
+    console.log(error)
+  }
 }
 
 const findUser = (id) => {
