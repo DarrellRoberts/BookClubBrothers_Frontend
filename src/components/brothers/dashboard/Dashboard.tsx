@@ -201,7 +201,7 @@ const Dashboard: React.FC = () => {
             <h2 className="underline">Comments</h2>
             <ul>
               {filterComments.length === 0 ? (
-                <li> You have written no comments...boring bastard</li>
+                <li> You have written no comments</li>
               ) : (
                 filterComments.map((book) => (
                   <li>
