@@ -237,7 +237,7 @@ rules={[
         <span role="img" aria-label="Anti-war">
         🪖
         </span>
-        Other
+        Anti-war
       </Space>
     </Option>
     <Option value="Drama" label="Drama">

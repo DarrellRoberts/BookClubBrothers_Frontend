@@ -15,6 +15,12 @@ import EditPagesButton from "./editbookform/pages/EditPagesButton.js";
 import EditPages from "./editbookform/pages/EditPages.js";
 import EditDateButton from "./editbookform/datemeeting/EditDateButton.js";
 import EditDate from "./editbookform/datemeeting/EditDate.js";
+import EditGenreButton from "./editbookform/genre/EditGenreButton.js";
+import EditGenre from "./editbookform/genre/EditGenre.js";
+import EditTitleButton from "./editbookform/title/EditTitleButton.js";
+import EditTitle from "./editbookform/title/EditTitle.js";
+import EditImageButton from "./editbookform/image/EditImageButton.js";
+import EditImage from "./editbookform/image/EditImage.js";
 
 import { AuthContext } from "../../../context/authContext.js";
 import { useJwt } from "react-jwt";
@@ -49,7 +55,9 @@ const SingleBook: React.FC = () => {
   const [showPublishEdit, setPublishEdit] = useState(false);
   const [showPageEdit, setPageEdit] = useState(false);
   const [showDateEdit, setDateEdit] = useState(false)
-
+  const [showGenreEdit, setGenreEdit] = useState(false)
+  const [showTitleEdit, setTitleEdit] = useState(false)
+  const [showImageEdit, setImageEdit] = useState(false)
   const [error, setError] = useState("");
 
   const { token } = useContext(AuthContext);
@@ -91,7 +99,16 @@ const SingleBook: React.FC = () => {
             {decodedToken ? (
               <DeleteBook id={id} setShowDelete={setShowDelete} />
             ) : null}
+            {showTitleEdit ? (
+              <div className="flex mt-5">
+              <EditTitle id={id} inTitle={bookData?.title}/>
+              </div>
+            ) : (
             <h1 className="bookTitle">{bookData.title}</h1>
+            )}
+            {decodedToken ? (
+              <EditTitleButton showTitleEdit={showTitleEdit} setTitleEdit={setTitleEdit}/>
+            ) : null}
             <div>
               {bookData?.reviewImageURL ? (
                 <img
@@ -112,8 +129,17 @@ const SingleBook: React.FC = () => {
                 </div>
               )}
             </div>
+            {showImageEdit ? (
+              <div className="ml-5">
+              <EditImage id={id} />
+              </div>
+            ) : null}
+            {decodedToken ? (
+              <EditImageButton showImageEdit={showImageEdit} setImageEdit={setImageEdit}/>
+            ) : null}
           </div>
 
+{/* rightside */}
           <div className="bookRightCon flex flex-col m-20">
             <h2 className="text-5xl underline">Details</h2>
             <ul>
@@ -158,11 +184,17 @@ const SingleBook: React.FC = () => {
               ) : null}
 
               <li className="mt-5 underline">Genres</li>
-              {bookData?.genre.map((type) => (
+              {showGenreEdit ? (
+                <EditGenre id={id} inGenre={bookData?.genre.map((type) => type)}/>
+              ) :
+              bookData?.genre.map((type) => (
                 <li>
                   {type[bookData?.genre?.length - 1] ? ` ${type}` : ` ${type},`}
                 </li>
               ))}
+                {decodedToken ? (
+                <EditGenreButton showGenreEdit={showGenreEdit} setGenreEdit={setGenreEdit} />
+              ) : null}
 
               <li className="mt-5 underline">Read</li>
               <li className="">{bookData?.read ? "Yes" : "No"}</li>
