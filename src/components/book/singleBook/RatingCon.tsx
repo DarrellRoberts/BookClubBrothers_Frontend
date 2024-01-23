@@ -1,5 +1,8 @@
-import {useState, useEffect} from "react"
+import {useState, useEffect, useContext} from "react"
 import RatingButton from "./ratingform/RatingButton";
+import EditRatingButton from "./ratingform/EditRatingButton";
+import { AuthContext } from "../../../context/authContext";
+import { useJwt } from "react-jwt";
 import "../../../style/ratingcon.css"
 
 interface book {
@@ -31,7 +34,13 @@ const RatingCon:React.FC<book> = ({bookData, id}) => {
 
     const [users, setUserData] = useState([])
     const [showRating, setShowRating] = useState<boolean>(false)
+    const [showEditRating, setShowEditRating] = useState<boolean>(false)
     const [error, setError] = useState("")
+
+    //extracting username of user for initial rating value
+    const { token } = useContext(AuthContext);  
+    const { decodedToken }: { decodedToken?: { username: string} } = useJwt(token);
+    const username = decodedToken?.username 
 
     const getData = async () => {
       try {
@@ -66,8 +75,17 @@ useEffect(() => {
 getData();
 }, [])
 
-console.log(bookData)
-console.log(raterObj)
+// function to find initialRating
+const findRatingByUsername = (raterObj, username) => {
+  const result = raterObj?.find((pair) => pair[0] === username);
+  if (result) {
+    return result[1]; // Return the rating if username is found
+  } else {
+    return "Rating not found";
+  }
+};
+const initialRating = findRatingByUsername(raterObj, username)
+
     return (
 <>
 <div className="ratingCon">
@@ -88,7 +106,12 @@ console.log(raterObj)
           ))}
 
   <li className="list-none mt-auto font-bold">Group Rating: {Math.floor(bookData?.totalScore * 100) / 100}</li>
+  {decodedToken ? (
+  <div className="flex justify-center">
   <RatingButton showRating={showRating} setShowRating={setShowRating} id={id}/>
+  <EditRatingButton showEditRating={showEditRating} setShowEditRating={setShowEditRating} id={id} initialRating={initialRating} />
+  </div>
+  ) : null}
 </div>
 </>
     )

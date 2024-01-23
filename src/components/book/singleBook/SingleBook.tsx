@@ -6,6 +6,8 @@ import { dateFormatter } from "../../../functions/dateFormatter.js";
 import Back from "../../misc/Back.js";
 import DeleteBook from "../booklibrary/bookform/DeleteBook.js";
 import RatingCon from "./RatingCon.js";
+import EditBookButton from "./editbookform/EditBookButton.js";
+import EditBookForm from "./editbookform/EditBookForm.js";
 import { AuthContext } from "../../../context/authContext.js";
 import { useJwt } from "react-jwt";
 import "../../../style/singlebook.css";
@@ -35,8 +37,8 @@ const SingleBook: React.FC = () => {
   const [bookData, setBook] = useState<book>();
   const [loading, setLoading] = useState(true);
   const [showDelete, setShowDelete] = useState(false)
+  const [showBookEdit, setShowBookEdit] = useState(false)
   const [error, setError] = useState("")
-
 
   const { token } = useContext(AuthContext);
   const { decodedToken }: { decodedToken?: { username: string} } = useJwt(token);
@@ -97,8 +99,21 @@ const SingleBook: React.FC = () => {
           </div>
 
           <div className="bookRightCon flex flex-col m-20">
+            {decodedToken ? (<EditBookButton setShowBookEdit={setShowBookEdit} showBookEdit={showBookEdit} />) : null}
             <h2 className="text-5xl underline">Details</h2>
-
+            
+            {showBookEdit ? (
+            <ul>
+            <EditBookForm  
+            id={id}
+            inAuthor={bookData?.author}
+            inPublishedIn={bookData?.yearPublished}
+            inPages={bookData?.pages}
+            inGenres={bookData?.genre.map((genres) => genres)}
+            inRead={bookData?.read}
+            inDateOfMeeting={bookData?.dateOfMeeting}
+            />
+            </ul>) : (
             <ul>
               <li className="mt-5 underline">Author</li>
               <li className="">{bookData?.author}</li>
@@ -124,7 +139,7 @@ const SingleBook: React.FC = () => {
               <li className="">{bookData?.read ? "Yes" : "No"}</li>
 
               <li className="mt-5 underline">Date of meeting</li>
-              <li className="">{dateFormatter(bookData?.dateOfMeeting)}</li>
+              <li className="">{bookData?.dateOfMeeting ? dateFormatter(bookData?.dateOfMeeting) : "???"}</li>
 
               <li className="mt-5 underline">Score</li>
               <li className="">{bookData?.totalScore}</li>
@@ -138,6 +153,7 @@ const SingleBook: React.FC = () => {
                 "No comments"
               )}
             </ul>
+            )}
           </div>
         </div>
       )}
