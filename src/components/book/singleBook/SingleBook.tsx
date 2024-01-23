@@ -6,8 +6,16 @@ import { dateFormatter } from "../../../functions/dateFormatter.js";
 import Back from "../../misc/Back.js";
 import DeleteBook from "../booklibrary/bookform/DeleteBook.js";
 import RatingCon from "./RatingCon.js";
-import EditBookButton from "./editbookform/EditBookButton.js";
-import EditBookForm from "./editbookform/EditBookForm.js";
+
+import EditAuthorButton from "./editbookform/author/EditAuthorButton.js";
+import EditAuthor from "./editbookform/author/EditAuthor.js";
+import EditPublishButton from "./editbookform/published/EditPublishButton.js";
+import EditPublished from "./editbookform/published/EditPublished.js";
+import EditPagesButton from "./editbookform/pages/EditPagesButton.js";
+import EditPages from "./editbookform/pages/EditPages.js";
+import EditDateButton from "./editbookform/datemeeting/EditDateButton.js";
+import EditDate from "./editbookform/datemeeting/EditDate.js";
+
 import { AuthContext } from "../../../context/authContext.js";
 import { useJwt } from "react-jwt";
 import "../../../style/singlebook.css";
@@ -36,26 +44,31 @@ interface book {
 const SingleBook: React.FC = () => {
   const [bookData, setBook] = useState<book>();
   const [loading, setLoading] = useState(true);
-  const [showDelete, setShowDelete] = useState(false)
-  const [showBookEdit, setShowBookEdit] = useState(false)
-  const [error, setError] = useState("")
+  const [showDelete, setShowDelete] = useState(false);
+  const [showAuthorEdit, setAuthorEdit] = useState(false);
+  const [showPublishEdit, setPublishEdit] = useState(false);
+  const [showPageEdit, setPageEdit] = useState(false);
+  const [showDateEdit, setDateEdit] = useState(false)
+
+  const [error, setError] = useState("");
 
   const { token } = useContext(AuthContext);
-  const { decodedToken }: { decodedToken?: { username: string} } = useJwt(token);
+  const { decodedToken }: { decodedToken?: { username: string } } =
+    useJwt(token);
   const { id } = useParams();
 
   const getBookData = async () => {
     try {
-    const data = await fetch(
-      `https://bookclubbrothers-backend.onrender.com/books/${id}`
-    );
-    const book = await data.json();
-    setBook(book);
-    setLoading(false);
-} catch (err) {
-  setError(err)
-  console.log(error)
-}
+      const data = await fetch(
+        `https://bookclubbrothers-backend.onrender.com/books/${id}`
+      );
+      const book = await data.json();
+      setBook(book);
+      setLoading(false);
+    } catch (err) {
+      setError(err);
+      console.log(error);
+    }
   };
   useEffect(() => {
     getBookData();
@@ -65,16 +78,19 @@ const SingleBook: React.FC = () => {
 
   return (
     <>
-<Back />
-{showDelete ? (
-  <h1 className="bookTitle flex justify-center items-center h-screen text-center">Book is deleted</h1>
-) :
-      loading ? (
+      <Back />
+      {showDelete ? (
+        <h1 className="bookTitle flex justify-center items-center h-screen text-center">
+          Book is deleted
+        </h1>
+      ) : loading ? (
         <Loader />
       ) : (
         <div className="mainSingleCon flex items-center">
           <div className="bookTitleCon flex flex-col">
-          {decodedToken ? (<DeleteBook id={id} setShowDelete={setShowDelete}/>) : null}
+            {decodedToken ? (
+              <DeleteBook id={id} setShowDelete={setShowDelete} />
+            ) : null}
             <h1 className="bookTitle">{bookData.title}</h1>
             <div>
               {bookData?.reviewImageURL ? (
@@ -99,34 +115,47 @@ const SingleBook: React.FC = () => {
           </div>
 
           <div className="bookRightCon flex flex-col m-20">
-            {decodedToken ? (<EditBookButton setShowBookEdit={setShowBookEdit} showBookEdit={showBookEdit} />) : null}
             <h2 className="text-5xl underline">Details</h2>
-            
-            {showBookEdit ? (
-            <ul>
-            <EditBookForm  
-            id={id}
-            inAuthor={bookData?.author}
-            inPublishedIn={bookData?.yearPublished}
-            inPages={bookData?.pages}
-            inGenres={bookData?.genre.map((genres) => genres)}
-            inRead={bookData?.read}
-            inDateOfMeeting={bookData?.dateOfMeeting}
-            />
-            </ul>) : (
             <ul>
               <li className="mt-5 underline">Author</li>
-              <li className="">{bookData?.author}</li>
-
+              <li className="">
+                {showAuthorEdit ? (
+                  <EditAuthor inAuthor={bookData?.author} id={id} />
+                ) : (
+                  bookData?.author
+                )}
+              </li>
+              {decodedToken ? (
+                <span>
+                  <EditAuthorButton
+                    setAuthorEdit={setAuthorEdit}
+                    showAuthorEdit={showAuthorEdit}
+                  />
+                </span>
+              ) : null}
+              
               <li className="mt-5 underline">Published in</li>
               <li className="">
-                {bookData?.yearPublished < 0
+                {showPublishEdit ? (
+                  <EditPublished inPublish={bookData?.yearPublished} id={id}/>
+                ) :
+                bookData?.yearPublished < 0
                   ? Math.abs(bookData?.yearPublished) + " BCE"
                   : bookData?.yearPublished}
               </li>
-
+                  {decodedToken ? (
+                    <EditPublishButton 
+                    showPublishEdit={showPublishEdit} 
+                    setPublishEdit={setPublishEdit} />
+                  ) : null}
               <li className="mt-5 underline">Number of pages</li>
-              <li className="">{bookData?.pages}</li>
+              {showPageEdit ? (
+                <EditPages inPages={bookData?.pages} id={id}/>
+              ) : (
+              <li className="">{bookData?.pages}</li>)}
+              {decodedToken ? (
+                <EditPagesButton showPageEdit={showPageEdit} setPageEdit={setPageEdit}/>
+              ) : null}
 
               <li className="mt-5 underline">Genres</li>
               {bookData?.genre.map((type) => (
@@ -139,7 +168,17 @@ const SingleBook: React.FC = () => {
               <li className="">{bookData?.read ? "Yes" : "No"}</li>
 
               <li className="mt-5 underline">Date of meeting</li>
-              <li className="">{bookData?.dateOfMeeting ? dateFormatter(bookData?.dateOfMeeting) : "???"}</li>
+              <li className="">
+                {showDateEdit ? (
+                  <EditDate id={id}/>
+                ) :
+                bookData?.dateOfMeeting
+                  ? dateFormatter(bookData?.dateOfMeeting)
+                  : "???"}
+              </li>
+              {decodedToken ? (
+                <EditDateButton showDateEdit={showDateEdit} setDateEdit={setDateEdit} />
+              ) : null}
 
               <li className="mt-5 underline">Score</li>
               <li className="">{bookData?.totalScore}</li>
@@ -153,11 +192,10 @@ const SingleBook: React.FC = () => {
                 "No comments"
               )}
             </ul>
-            )}
           </div>
         </div>
       )}
-      <RatingCon bookData={bookData} id={id}/>
+      <RatingCon bookData={bookData} id={id} />
     </>
   );
 };
