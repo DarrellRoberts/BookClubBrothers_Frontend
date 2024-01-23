@@ -1,10 +1,10 @@
 import {useState, useEffect, useContext} from "react"
-import RatingButton from "./ratingform/RatingButton";
-import EditRatingButton from "./ratingform/EditRatingButton";
+import CommentButton from "./commentform/CommentButton";
+import EditCommentButton from "./commentform/EditCommentButton"
 import { AuthContext } from "../../../context/authContext";
 import { useJwt } from "react-jwt";
-import "../../../style/ratingcon.css"
-import "../../../style/ratingconRes.css"
+import "../../../style/commentcon.css"
+import "../../../style/commentconRes.css"
 
 
 interface book {
@@ -22,21 +22,21 @@ interface book {
     pages: number;
     read: boolean;
     dateOfMeeting: string;
-    commentInfo: {
-      commentId: [string];
-      comments: [string];
+    commentInfo?: {
+      commentId?: [string];
+      comments?: [string];
     };
 },
 id: string
   }
 
-type RaterObj = Record<string, number> | [string, number][];
+type commentObj = Record<string, number> | [string, number][];
 
 const RatingCon:React.FC<book> = ({bookData, id}) => {
 
     const [users, setUserData] = useState([])
-    const [showRating, setShowRating] = useState<boolean>(false)
-    const [showEditRating, setShowEditRating] = useState<boolean>(false)
+    const [addComment, setAddComment] = useState<boolean>(false)
+    const [showEditComment, setShowEditComment] = useState<boolean>(false)
     const [error, setError] = useState("")
 
     //extracting username of user for initial rating value
@@ -60,58 +60,60 @@ const RatingCon:React.FC<book> = ({bookData, id}) => {
     return user ? user.username : "user not found"
     }
 
-    const raterArr2 = bookData?.scoreRatings?.raterId?.map((id) => findUser(id))
+    const commentArr2 = bookData?.commentInfo?.commentId?.map((id) => findUser(id))
 
-    let raterObj: RaterObj = {}
-    const findBookScore = () => {
-    for (let i = 0; i < raterArr2?.length; i++) {
-      raterObj[raterArr2[i]] = bookData?.scoreRatings?.rating[i]
-      findUser(raterObj[bookData?.scoreRatings?.rating[i]])
+    let commentObj: commentObj = {}
+    const findComment = () => {
+    for (let i = 0; i < commentArr2?.length; i++) {
+      commentObj[commentArr2[i]] = bookData?.commentInfo?.comments[i]
+      findUser(commentObj[bookData?.commentInfo?.comments[i]])
     }
-    raterObj = Object.entries(raterObj)
-    return raterObj
+    commentObj = Object.entries(commentObj)
+    return commentObj
     }
-    findBookScore()
+    findComment()
 
 useEffect(() => {
 getData();
 }, [])
 
 // function to find initialRating
-const findRatingByUsername = (raterObj, username) => {
-  const result = raterObj?.find((pair) => pair[0] === username);
+const findCommentByUsername = (commentObj, username) => {
+  const result = commentObj?.find((pair) => pair[0] === username);
   if (result) {
     return result[1]; // Return the rating if username is found
   } else {
     return false;
   }
 };
-const initialRating = findRatingByUsername(raterObj, username)
+const initialComment = findCommentByUsername(commentObj, username)
 
-return (
+    return (
 <>
-<div className="ratingCon">
-    <h2 className="ratingTitle underline">Ratings</h2>
-    {Array.isArray(raterObj)
-        ? raterObj.map(([name, value]) => (
+<div className="commentCon">
+    <h2 className="ratingTitle underline">Comments</h2>
+    {Array.isArray(commentObj)
+        ? commentObj.map(([name, value]) => (
             <>
             <li className="list-none m-2" key={name}>
               {name}:
             </li>
-            <div className="ratingGraph" style={{width: `${value}rem`}}>{value}</div>
+            <div className="ratingGraph" style={{width: `${value}rem`}}>
+              "{value}"</div>
             </>
           ))
-        : Object.entries(raterObj).map(([name, value]) => (
+        : Object.entries(commentObj).map(([name, value]) => (
             <li className="list-none mb-1 ml-2" key={name}>
               {name}: {value}
             </li>
           ))}
 
-  <li className="list-none mt-auto font-bold">Group Rating: {Math.floor(bookData?.totalScore * 100) / 100}</li>
   {decodedToken ? (
-  <div className="flex justify-center">
-  {initialRating ? (  <EditRatingButton showEditRating={showEditRating} setShowEditRating={setShowEditRating} id={id} initialRating={initialRating} /> ) : (
-  <RatingButton showRating={showRating} setShowRating={setShowRating} id={id}/>
+  <div className="flex justify-center items-end mt-auto">
+  {initialComment ? (
+  <EditCommentButton showEditComment={showEditComment} setShowEditComment={setShowEditComment} id={id} inComment={initialComment} />
+  ) : (
+  <CommentButton addComment={addComment} setAddComment={setAddComment} id={id} />
   )}
   </div>
   ) : null}

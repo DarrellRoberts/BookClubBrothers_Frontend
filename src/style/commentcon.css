@@ -1,0 +1,12 @@
+.commentCon {
+    border-width: 2px;
+    border-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 600px;
+    margin-left: 2rem;
+    background-color: var(--tertiaryColor);
+    color: white
+}

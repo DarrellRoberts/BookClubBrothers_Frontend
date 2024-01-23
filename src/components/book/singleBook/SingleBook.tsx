@@ -6,7 +6,13 @@ import { dateFormatter } from "../../../functions/dateFormatter.js";
 import Back from "../../misc/Back.js";
 import DeleteBook from "../booklibrary/bookform/DeleteBook.js";
 import RatingCon from "./RatingCon.js";
+import CommentCon from "./CommentCon.js"
+import { AuthContext } from "../../../context/authContext.js";
+import { useJwt } from "react-jwt";
+import "../../../style/singlebook.css";
+import "../../../style/singlebookRes.css";
 
+// importing edit buttons
 import EditAuthorButton from "./editbookform/author/EditAuthorButton.js";
 import EditAuthor from "./editbookform/author/EditAuthor.js";
 import EditPublishButton from "./editbookform/published/EditPublishButton.js";
@@ -21,11 +27,6 @@ import EditTitleButton from "./editbookform/title/EditTitleButton.js";
 import EditTitle from "./editbookform/title/EditTitle.js";
 import EditImageButton from "./editbookform/image/EditImageButton.js";
 import EditImage from "./editbookform/image/EditImage.js";
-
-import { AuthContext } from "../../../context/authContext.js";
-import { useJwt } from "react-jwt";
-import "../../../style/singlebook.css";
-import "../../../style/singlebookRes.css";
 
 interface book {
   author: string;
@@ -214,20 +215,14 @@ const SingleBook: React.FC = () => {
 
               <li className="mt-5 underline">Score</li>
               <li className="">{bookData?.totalScore}</li>
-
-              <li className="mt-5 underline"> Comments:</li>
-              {bookData?.commentInfo?.comments?.length > 0 ? (
-                <li className="mt-5 ml-5 list-disc">
-                  "{bookData?.commentInfo?.comments.map((comment) => comment)}"{" "}
-                </li>
-              ) : (
-                "No comments"
-              )}
             </ul>
           </div>
         </div>
       )}
+      <div className="ratingAndCommentCon">
       <RatingCon bookData={bookData} id={id} />
+      <CommentCon bookData={bookData} id={id} />
+      </div>
     </>
   );
 };

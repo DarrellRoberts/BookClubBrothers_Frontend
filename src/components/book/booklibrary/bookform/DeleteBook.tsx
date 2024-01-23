@@ -57,7 +57,7 @@ setError("You need the admin's permission to delete a book. You are not the admi
       onOpenChange={() => console.log('open change')}
     >
     <Button 
-    className="" 
+    className="deleteButton" 
     danger>
     Delete Book
     </Button>
