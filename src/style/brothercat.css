@@ -27,6 +27,7 @@
 .brotherBookLeft img {
     width: 200px;
     height: 350px;
+    
     border-width: 3px;
     border-color: black;
 }

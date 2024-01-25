@@ -5,11 +5,18 @@ import { Button } from "antd"
 import Loader from "../loader/Loader"
 import { AuthContext } from "../../context/authContext";
 import { useJwt } from "react-jwt";
+
 import PictureUpload from "./brotherform/PictureUpload";
+import EditUsername from "./brotherform/EditUsername"
+import EditUsernameButton from "./brotherform/EditUsernameButton"
+import EditCity from "./brotherform/EditCity"
+import EditCityButton from "./brotherform/EditCityButton"
+
 import Back from "../misc/Back"
 import Search from "../misc/Search"
 import "../../style/brothercat.css"
 import "../../style/brothercatRes.css"
+
 
 const Brothercat: React.FC = () => {   
 const { token } = useContext(AuthContext);
@@ -19,14 +26,18 @@ const {decodedToken}: {
       _id: string;
     };
   } = useJwt(token);
-const userName = decodedToken?.username
 
 const [userData, setUserData] = useState([])
 const [bookData, setBookData] = useState([])
-const [editImage, setEditImage] = useState<boolean>(false);
 const [loading, setLoading] = useState<boolean>(true)
 const [searchBar, setSearchBar] = useState("");
 const [error, setError] = useState("")
+// useState for edit buttons
+const [editImage, setEditImage] = useState<boolean>(false);
+const [editUsername, setEditUsername] = useState<boolean>(false);
+const [editCity, setEditCity] = useState<boolean>(false);
+// const [editCountry, setEditCountry] = useState<boolean>(false);
+// const [editGenre, setEditGenre] = useState<boolean>(false);
 
     const getData = async () => {
         try {
@@ -94,17 +105,25 @@ const filteredResults = Array.isArray(userData)
         {filteredResults.length > 0 ?
         filteredResults.map((user, index) => 
         (
-
             <div key={index} className="brotherBook border-black border-4 border-solid m-5 flex">
                 
-                <div className="brotherBookLeft flex flex-col justify-evenly items-center">
-                <h2 className="text-black underline">{user?.username}</h2>
+                <div className="brotherBookLeft flex flex-col justify-evenly items-center">             
+                {decodedToken?._id === user?._id && editUsername ? (
+                    <EditUsername inUsername={user?.username} id={user?._id} setEditUsername={setEditUsername} />
+                ) : decodedToken?._id === user?._id ? (
+                    <div className="flex">
+                    <EditUsernameButton setEditUsername={setEditUsername} editUsername={editUsername}  />
+                    <h2 className="text-black underline">{user?.username}</h2>
+                    </div>
+                ): (
+                    <h2 className="text-black underline">{user?.username}</h2>
+                )}  
                 <Link to={`/brothers/${user.username}`}>
                     <img
                     className="opacity-60 grayscale"
                     src={user?.userInfo?.profileURL} 
                     alt="profile_pic" /></Link>
-                {userName === user?.username ?
+                {decodedToken._id === user?._id ?
                     editImage ?
                     <>
                     <div className="absolute">
@@ -133,9 +152,24 @@ const filteredResults = Array.isArray(userData)
                     <ul>
                     <li className="brotherList underline pt-5">Location</li>
                     {user?.userInfo?.residence?.city ? 
-                    (<li>City: {user?.userInfo?.residence?.city}</li>) 
+                    editCity ? (
+                    <EditCity inCity={user?.userInfo?.residence?.city} id={user?._id} setEditCity={setEditCity}/>)
+                    : (
+                    <div className="flex">
+                    <li>City: {user?.userInfo?.residence?.city}</li>
+                    {decodedToken?._id  === user?._id ? (
+                    <EditCityButton editCity={editCity} setEditCity={setEditCity} />)
+                    : null}
+                    </div>)
                     : 
-                    (<li className="text-red-500 font-bold">No city written</li> )}
+                    (
+                    <div className="flex">
+                    <li className="text-red-500 font-bold">No city written</li>
+                    {decodedToken?._id  === user?._id ? (
+                    <EditCityButton editCity={editCity} setEditCity={setEditCity} />)
+                    : null}
+                    </div>
+                    )}
 
                     {user?.userInfo?.residence?.country ? 
                     (<li>Country: {user?.userInfo?.residence?.country}</li>) 
