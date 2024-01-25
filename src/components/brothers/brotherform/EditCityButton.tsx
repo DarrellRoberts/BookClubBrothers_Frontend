@@ -9,14 +9,7 @@ const EditCityButton: React.FC<props> = ({setEditCity, editCity}) => {
 return(
     <>
     <div className="flex items-center">
-        {editCity ? (
-    <Button
-        className=""
-        onClick={() => setEditCity(false)}
-      >
-        X
-      </Button>
-      ) : (
+        {editCity ? null : (
       <Button
         className=""
         onClick={() => setEditCity(true)}

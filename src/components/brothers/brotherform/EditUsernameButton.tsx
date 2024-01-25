@@ -9,14 +9,7 @@ const EditUsernameButton: React.FC<props> = ({setEditUsername, editUsername}) =>
 return(
     <>
     <div className="flex items-center">
-        {editUsername ? (
-    <Button
-        className=""
-        onClick={() => setEditUsername(false)}
-      >
-        X
-      </Button>
-      ) : (
+        {editUsername ? null : (
       <Button
         className=""
         onClick={() => setEditUsername(true)}

@@ -115,7 +115,7 @@ const filteredResults = Array.isArray(userData)
                     <EditUsernameButton setEditUsername={setEditUsername} editUsername={editUsername}  />
                     <h2 className="text-black underline">{user?.username}</h2>
                     </div>
-                ): (
+                ) : (
                     <h2 className="text-black underline">{user?.username}</h2>
                 )}  
                 <Link to={`/brothers/${user.username}`}>
@@ -123,7 +123,7 @@ const filteredResults = Array.isArray(userData)
                     className="opacity-60 grayscale"
                     src={user?.userInfo?.profileURL} 
                     alt="profile_pic" /></Link>
-                {decodedToken._id === user?._id ?
+                {decodedToken?._id === user?._id ?
                     editImage ?
                     <>
                     <div className="absolute">
@@ -152,7 +152,7 @@ const filteredResults = Array.isArray(userData)
                     <ul>
                     <li className="brotherList underline pt-5">Location</li>
                     {user?.userInfo?.residence?.city ? 
-                    editCity ? (
+                    decodedToken?._id  === user?._id && editCity ? (
                     <EditCity inCity={user?.userInfo?.residence?.city} id={user?._id} setEditCity={setEditCity}/>)
                     : (
                     <div className="flex">
@@ -164,7 +164,11 @@ const filteredResults = Array.isArray(userData)
                     : 
                     (
                     <div className="flex">
-                    <li className="text-red-500 font-bold">No city written</li>
+                    {decodedToken?._id  === user?._id && editCity ? (
+                    <EditCity inCity={user?.userInfo?.residence?.city} id={user?._id} setEditCity={setEditCity}/>
+                    ) : (
+                        <li className="text-red-500 font-bold">No city written</li>
+                    )}
                     {decodedToken?._id  === user?._id ? (
                     <EditCityButton editCity={editCity} setEditCity={setEditCity} />)
                     : null}
