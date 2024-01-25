@@ -214,7 +214,7 @@ const filteredResults = Array.isArray(userData)
                     {decodedToken?._id === user._id && editGenre ? (
                     <EditGenre setEditGenre={setEditGenre} id={decodedToken?._id} inGenre={user?.userInfo?.favGenre?.map(genre => genre)} />
                     ) :
-                    user?.userInfo?.favGenre.length > 0 ? user?.userInfo?.favGenre?.map((genre) =>
+                    user?.userInfo?.favGenre?.length > 0 ? user?.userInfo?.favGenre?.map((genre) =>
                     (
                     <>
                     <li className="list-disc">{genre}</li>

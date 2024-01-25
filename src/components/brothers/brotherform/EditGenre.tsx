@@ -11,11 +11,11 @@ interface props {
 }
 
 const EditGenre: React.FC<props> = ({ id, inGenre, setEditGenre }) => {
-  const [favGenre, setFavGenre] = useState(inGenre);
+  const [favGenre, setFavGenre] = useState(inGenre?.map(genre => `${genre}`));
   const [error, setError] = useState("");
   const [loadings, setLoadings] = useState([]);
   const { token } = useContext(AuthContext);
-
+console.log(favGenre)
   const handleSubmit = async () => {
     try {
       setError(null);
@@ -57,7 +57,7 @@ const EditGenre: React.FC<props> = ({ id, inGenre, setEditGenre }) => {
       setLoadings((prevLoadings) => {
         const newLoadings = [...prevLoadings];
         newLoadings[index] = false;
-        // document.location.reload();
+        document.location.reload();
         return newLoadings;
       });
     }, 4000);
