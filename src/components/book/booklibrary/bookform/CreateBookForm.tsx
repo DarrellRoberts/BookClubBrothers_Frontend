@@ -293,7 +293,7 @@ rules={[
         <span role="img" aria-label="Non-fiction">
         📈
         </span>
-        Anthology
+        Non-fiction
       </Space>
     </Option>
   </Select>

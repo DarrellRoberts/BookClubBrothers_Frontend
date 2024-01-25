@@ -6,11 +6,16 @@ import Loader from "../loader/Loader"
 import { AuthContext } from "../../context/authContext";
 import { useJwt } from "react-jwt";
 
+//importing form components
 import PictureUpload from "./brotherform/PictureUpload";
 import EditUsername from "./brotherform/EditUsername"
 import EditUsernameButton from "./brotherform/EditUsernameButton"
 import EditCity from "./brotherform/EditCity"
 import EditCityButton from "./brotherform/EditCityButton"
+import EditCountry from "./brotherform/EditCountry"
+import EditCountryButton from "./brotherform/EditCountryButton"
+import EditGenre from "./brotherform/EditGenre"
+import EditGenreButton from "./brotherform/EditGenreButton"
 
 import Back from "../misc/Back"
 import Search from "../misc/Search"
@@ -32,12 +37,13 @@ const [bookData, setBookData] = useState([])
 const [loading, setLoading] = useState<boolean>(true)
 const [searchBar, setSearchBar] = useState("");
 const [error, setError] = useState("")
+
 // useState for edit buttons
 const [editImage, setEditImage] = useState<boolean>(false);
 const [editUsername, setEditUsername] = useState<boolean>(false);
 const [editCity, setEditCity] = useState<boolean>(false);
-// const [editCountry, setEditCountry] = useState<boolean>(false);
-// const [editGenre, setEditGenre] = useState<boolean>(false);
+const [editCountry, setEditCountry] = useState<boolean>(false);
+const [editGenre, setEditGenre] = useState<boolean>(false);
 
     const getData = async () => {
         try {
@@ -174,16 +180,45 @@ const filteredResults = Array.isArray(userData)
                     : null}
                     </div>
                     )}
-
+{/* Country */}
                     {user?.userInfo?.residence?.country ? 
-                    (<li>Country: {user?.userInfo?.residence?.country}</li>) 
+                    decodedToken?._id  === user?._id && editCountry ? (
+                    <EditCountry inCountry={user?.userInfo?.residence?.country} id={user?._id} setEditCountry={setEditCountry}/>)
+                    : (
+                    <div className="flex">
+                    <li>Country: {user?.userInfo?.residence?.country}</li>
+                    {decodedToken?._id  === user?._id ? (
+                    <EditCountryButton editCountry={editCountry} setEditCountry={setEditCountry} />)
+                    : null}
+                    </div>)
                     : 
-                    (<li className="text-red-500 font-bold">No country written</li> )}
-
-                    <li className="brotherList underline pt-5">Favourite Genres</li>
-                    {user?.userInfo?.favGenre.length > 0 ? user?.userInfo?.favGenre?.map((genre) =>
                     (
+                    <div className="flex">
+                    {decodedToken?._id  === user?._id && editCountry ? (
+                    <EditCountry inCountry={user?.userInfo?.residence?.country} id={user?._id} setEditCountry={setEditCountry}/>
+                    ) : (
+                        <li className="text-red-500 font-bold">No country written</li>
+                    )}
+                    {decodedToken?._id  === user?._id ? (
+                    <EditCountryButton editCountry={editCountry} setEditCountry={setEditCountry} />)
+                    : null}
+                    </div>
+                    )}
+
+                    <div className="flex">
+                    <li className="brotherList underline pt-5">Favourite Genres</li>
+                    {decodedToken?._id === user._id ? (
+                    <EditGenreButton setEditGenre={setEditGenre} editGenre={editGenre}/>
+                    ) : null}
+                    </div>
+                    {decodedToken?._id === user._id && editGenre ? (
+                    <EditGenre setEditGenre={setEditGenre} id={decodedToken?._id} inGenre={user?.userInfo?.favGenre?.map(genre => genre)} />
+                    ) :
+                    user?.userInfo?.favGenre.length > 0 ? user?.userInfo?.favGenre?.map((genre) =>
+                    (
+                    <>
                     <li className="list-disc">{genre}</li>
+                    </>
                     )) : (
                     <li className="text-red-500 font-bold">None selected</li>
                     ) }
