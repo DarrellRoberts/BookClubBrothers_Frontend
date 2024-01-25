@@ -62,9 +62,10 @@ const SingleBook: React.FC = () => {
   const [error, setError] = useState("");
 
   const { token } = useContext(AuthContext);
-  const { decodedToken }: { decodedToken?: { username: string } } =
+  const { decodedToken }: { decodedToken?: { username: string, _id: string } } =
     useJwt(token);
   const { id } = useParams();
+  const AdId = "65723ac894b239fe25fe6871"
 
   const getBookData = async () => {
     try {
@@ -97,7 +98,7 @@ const SingleBook: React.FC = () => {
       ) : (
         <div className="mainSingleCon flex items-center">
           <div className="bookTitleCon flex flex-col">
-            {decodedToken ? (
+            {decodedToken?._id === AdId ? (
               <DeleteBook id={id} setShowDelete={setShowDelete} />
             ) : null}
             {showTitleEdit ? (
@@ -107,7 +108,7 @@ const SingleBook: React.FC = () => {
             ) : (
             <h1 className="bookTitle">{bookData.title}</h1>
             )}
-            {decodedToken ? (
+            {decodedToken?._id === AdId ? (
               <EditTitleButton showTitleEdit={showTitleEdit} setTitleEdit={setTitleEdit}/>
             ) : null}
             <div>
@@ -135,7 +136,7 @@ const SingleBook: React.FC = () => {
               <EditImage id={id} />
               </div>
             ) : null}
-            {decodedToken ? (
+            {decodedToken?._id === AdId ? (
               <EditImageButton showImageEdit={showImageEdit} setImageEdit={setImageEdit}/>
             ) : null}
           </div>
@@ -152,7 +153,7 @@ const SingleBook: React.FC = () => {
                   bookData?.author
                 )}
               </li>
-              {decodedToken ? (
+              {decodedToken?._id === AdId ? (
                 <span>
                   <EditAuthorButton
                     setAuthorEdit={setAuthorEdit}
@@ -170,7 +171,7 @@ const SingleBook: React.FC = () => {
                   ? Math.abs(bookData?.yearPublished) + " BCE"
                   : bookData?.yearPublished}
               </li>
-                  {decodedToken ? (
+                  {decodedToken?._id === AdId ? (
                     <EditPublishButton 
                     showPublishEdit={showPublishEdit} 
                     setPublishEdit={setPublishEdit} />
@@ -180,7 +181,7 @@ const SingleBook: React.FC = () => {
                 <EditPages inPages={bookData?.pages} id={id}/>
               ) : (
               <li className="">{bookData?.pages}</li>)}
-              {decodedToken ? (
+              {decodedToken?._id === AdId ? (
                 <EditPagesButton showPageEdit={showPageEdit} setPageEdit={setPageEdit}/>
               ) : null}
 
@@ -193,7 +194,7 @@ const SingleBook: React.FC = () => {
                   {type[bookData?.genre?.length - 1] ? ` ${type}` : ` ${type},`}
                 </li>
               ))}
-                {decodedToken ? (
+                {decodedToken?._id === AdId ? (
                 <EditGenreButton showGenreEdit={showGenreEdit} setGenreEdit={setGenreEdit} />
               ) : null}
 
@@ -209,7 +210,7 @@ const SingleBook: React.FC = () => {
                   ? dateFormatter(bookData?.dateOfMeeting)
                   : "???"}
               </li>
-              {decodedToken ? (
+              {decodedToken?._id === AdId ? (
                 <EditDateButton showDateEdit={showDateEdit} setDateEdit={setDateEdit} />
               ) : null}
 

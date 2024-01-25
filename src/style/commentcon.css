@@ -7,6 +7,9 @@
     justify-content: flex-start;
     width: 600px;
     margin-left: 2rem;
-    background-color: var(--tertiaryColor);
-    color: white
+    color: black;
+}
+
+.commentCon li {
+    background-color: white;
 }

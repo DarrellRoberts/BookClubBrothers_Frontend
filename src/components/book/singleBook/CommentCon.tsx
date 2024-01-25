@@ -95,10 +95,10 @@ const initialComment = findCommentByUsername(commentObj, username)
     {Array.isArray(commentObj)
         ? commentObj.map(([name, value]) => (
             <>
-            <li className="list-none m-2" key={name}>
+            <li className="list-none m-2 font-bold" key={name}>
               {name}:
             </li>
-            <div className="ratingGraph" style={{width: `${value}rem`}}>
+            <div className="" style={{width: `${value}rem`}}>
               "{value}"</div>
             </>
           ))
