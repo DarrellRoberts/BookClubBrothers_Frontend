@@ -10,6 +10,7 @@ import { useJwt } from "react-jwt";
 import Booklibrary from "./components/book/booklibrary/Booklibrary";
 import Brothercat from "./components/brothers/Brothercat";
 import SingleBook from "./components/book/singleBook/SingleBook";
+import Randomiser from "./components/book/randomiser/RandomiserHomepage";
 import ScrollToTop from "./functions/ScrollToTop";
 import Club from "./components/club/Club";
 import BookHomepage from "./components/book/BookHomepage";
@@ -30,8 +31,9 @@ function App() {
 
         <Route path="/books" element={<BookHomepage />} />
         <Route path="/books/library" element={<Booklibrary />} />
-        <Route path="/books/quiz" element={<Quiz />} />
         <Route path="/books/library/:id" element={<SingleBook />} />
+        <Route path="/books/quiz" element={<Quiz />} />
+        <Route path="/books/randomiser" element={<Randomiser />} />
 
         <Route path="/brothers" element={<Brothercat />} />
         <Route path="/brothers/:username" element={<DashboardOther />} />
