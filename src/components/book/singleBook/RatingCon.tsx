@@ -87,7 +87,7 @@ const findRatingByUsername = (raterObj, username) => {
   }
 };
 const initialRating = findRatingByUsername(raterObj, username)
-
+console.log()
 return (
 <>
 <div className="ratingCon">
