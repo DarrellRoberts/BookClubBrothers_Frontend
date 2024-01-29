@@ -48,7 +48,7 @@ const Booklibrary: React.FC = () => {
   }, []);
  
   const filteredResults = Array.isArray(bookData)
-      ? bookData?.filter((book) => book.title.includes(searchBar))
+      ? bookData?.filter((book) => book.title.includes(searchBar) && book.read === true)
       : ["No results"];
 
   return (
