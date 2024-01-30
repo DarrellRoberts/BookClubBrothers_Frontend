@@ -59,7 +59,7 @@ useEffect(() => {
     getBookData();
     getUserData();
 }, [])
-console.log(bookData[index]?.imageURL);
+
     return (
         <>
         <Back />

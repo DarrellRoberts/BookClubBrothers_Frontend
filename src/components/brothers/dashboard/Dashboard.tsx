@@ -114,8 +114,7 @@ const Dashboard: React.FC = () => {
     getData();
     getBookData();
   }, []);
-console.log(userData)
-console.log(filterComments)
+
   return (
     <>
       {loading ? (
