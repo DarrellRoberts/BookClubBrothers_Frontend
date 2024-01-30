@@ -1,5 +1,5 @@
 import {useState, useEffect, useContext} from "react"
-import Loader from "../../loader/Loader"
+import LoaderNoText from "../../loader/LoaderNoText"
 import Back from "../../misc/Back"
 import CreateUnreadBook from "./bookform/CreateUnreadBook"
 import DeleteBook from "./bookform/DeleteBook"
@@ -63,15 +63,18 @@ console.log(bookData);
     return (
         <>
         <Back />
+        <h1 className="randomTitle">Randomiser</h1>
         <div className="randomCon">
-        <h1 className="randomTitle mt-5">Randomiser</h1>
             <div className="randomBox">
                 <div className="randomBoxLeft">
                 {loading ? (
-                  <Loader />
+                  <div className="flex justify-center items-center mt-20">
+                  <LoaderNoText />
+                  </div>
                 ) : 
                 bookData?.map((book) => 
                 (
+                <>
                 <div 
                 className={decodedToken ? "bookDeleteBox" : "bookBox"}
                 onClick={() => setIndex(bookData.indexOf(book))}
@@ -83,29 +86,35 @@ console.log(bookData);
                 ><DeleteBook id={book?._id} /></div>) : null} 
                 <p> - suggested by {findUser(book?.suggestedBy)}</p>
                 </div>
+                </>
                 ))
                 }
-                <CreateUnreadBook showCreateBook={showCreateBook} 
+                                <CreateUnreadBook 
+                showCreateBook={showCreateBook} 
                 setShowCreateBook={setShowCreateBook}/>
                 </div>
                 <div className="randomBoxRight">
                 {loading ? (
-                  <Loader />
+                  <div className="flex justify-center items-center mt-20">
+                  <LoaderNoText />
+                  </div>
                 ) : (
                   <div className="randomDetailsCon">
                     <h2>{bookData[index]?.title}</h2>
-                    <ul>
+                    <ul className="text-center">
                       <li>Author: {bookData[index]?.author}</li>
                       <li>Published: {bookData[index]?.yearPublished}</li>
                       <li>Pages: {bookData[index]?.pages}</li>
-                      <li>Genre {bookData[index]?.genre.map((theme) => (
+                      <li>Genre: {bookData[index]?.genre.map((theme) => (
                         <li>{theme}</li>
                       ))}</li>
+                      <li>Suggested by: {findUser(bookData[index]?.suggestedBy)} </li>
                     </ul>
+                    <Randomiser bookLength={bookData?.length} bookId={bookData[index]?._id} setIndex={setIndex}/>
                     </div>
+                    
                   )
                 }
-                <Randomiser bookLength={bookData?.length} bookId={bookData[index]?._id} setIndex={setIndex}/>
                 </div>
             </div>
         </div>
