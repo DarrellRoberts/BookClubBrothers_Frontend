@@ -59,7 +59,7 @@ useEffect(() => {
     getBookData();
     getUserData();
 }, [])
-console.log(bookData);
+console.log(bookData[index]?.imageURL);
     return (
         <>
         <Back />
@@ -89,17 +89,22 @@ console.log(bookData);
                 </>
                 ))
                 }
-                                <CreateUnreadBook 
+                <CreateUnreadBook 
                 showCreateBook={showCreateBook} 
                 setShowCreateBook={setShowCreateBook}/>
                 </div>
-                <div className="randomBoxRight">
+                <div className="randomBoxRight" 
+                style={{
+                  backgroundImage: `URL(${bookData[index]?.imageURL})`, backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  maxHeight: "750px"}}>
                 {loading ? (
                   <div className="flex justify-center items-center mt-20">
                   <LoaderNoText />
                   </div>
                 ) : (
-                  <div className="randomDetailsCon">
+                  <div className="randomDetailsCon bg-white">
                     <h2>{bookData[index]?.title}</h2>
                     <ul className="text-center">
                       <li>Author: {bookData[index]?.author}</li>

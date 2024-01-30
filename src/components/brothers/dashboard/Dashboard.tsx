@@ -79,11 +79,12 @@ const Dashboard: React.FC = () => {
 
   const findMinBook = bookData.find((book) => book._id === minScoreBook);
   const findMaxBook = bookData.find((book) => book._id === maxScoreBook);
+  const readBooks = bookData.filter((book) => book.read === true)
 
   //Additional Stats
   const percentageBooks = parseFloat(
     (
-      (findUser?.userInfo?.books?.score?.length / bookData?.length) *
+      (findUser?.userInfo?.books?.score?.length / readBooks?.length) *
       100
     ).toFixed(2)
   );
@@ -101,7 +102,7 @@ const Dashboard: React.FC = () => {
 
   //unread books
   const filterUnreadBooks = bookData.filter(
-    (book) => !book.scoreRatings.raterId.includes(decodedToken._id)
+    (book) => !book.scoreRatings.raterId.includes(decodedToken._id) && book.read === true
   );
 
   // comments

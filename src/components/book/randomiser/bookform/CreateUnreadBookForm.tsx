@@ -17,6 +17,7 @@ const [author, setAuthor] = useState<string>("")
 const [pages, setPages] = useState<number>(0)
 const [yearPublished, setYearPublished] = useState<number>(0)
 const [genre, setGenre] = useState([])
+const [imageURL, setImageURL] = useState("")
 const [error, setError] = useState("")
 const [loadings, setLoadings] = useState([])
 
@@ -36,7 +37,8 @@ const handleSubmit = async () => {
             author,
             pages,
             yearPublished,
-            genre }),
+            genre,
+            imageURL }),
         });
         const data = await response.json();
         if (!response.ok) {
@@ -292,6 +294,18 @@ rules={[
     </Option>
   </Select>
   </Form.Item>
+
+{/* ImageURL */}
+<Form.Item
+      label="Image URL"
+      name="image"
+    >
+      <Input
+      type="text"
+      onChange={(e) => setImageURL(e.target.value)}
+      value={imageURL}
+      />
+    </Form.Item>
 
 {/* Submission */}
     <Form.Item

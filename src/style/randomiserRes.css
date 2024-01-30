@@ -27,6 +27,7 @@
         flex-direction: column;
         padding: 0px;
         border-width: 0px;
+        max-width: 180px;
     }
     .randomDetailsCon {
         margin-left: 5px;
