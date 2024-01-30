@@ -7,14 +7,14 @@ const { Option } = Select
 interface props {
   id: string;
   inGenre: [string] | null;
-  setEditGenre: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const EditGenre: React.FC<props> = ({ id, inGenre, setEditGenre }) => {
+const EditGenre: React.FC<props> = ({ id, inGenre }) => {
   const [favGenre, setFavGenre] = useState(inGenre?.map(genre => `${genre}`));
   const [error, setError] = useState("");
   const [loadings, setLoadings] = useState([]);
   const { token } = useContext(AuthContext);
+
 console.log(favGenre)
   const handleSubmit = async () => {
     try {
@@ -225,12 +225,6 @@ console.log(favGenre)
             htmlType="submit"
           >
             Submit
-          </Button>
-          <Button
-            className=""
-            onClick={() => setEditGenre(false)}
-          >
-            X
           </Button>
           {error ? <h4 className="errorH">{error}</h4> : null}
         </Form.Item>

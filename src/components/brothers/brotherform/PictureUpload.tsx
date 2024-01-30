@@ -12,8 +12,8 @@ const normFile = (e) => {
 };
 
 interface props {
-    id: string
-    setEditImage: React.Dispatch<React.SetStateAction<boolean>>
+    id: string,
+    inImage: string
 }
 
 interface imageInt {
@@ -31,7 +31,7 @@ interface imageInt {
   stream: () => ReadableStream<Uint8Array>
 }
 
-const PictureUpload: React.FC<props> = ({id, setEditImage  }) => {
+const PictureUpload: React.FC<props> = ({id, inImage  }) => {
   const { token } = useContext(AuthContext);
 
   const [form] = Form.useForm(); // Create a form instance
@@ -74,7 +74,6 @@ const PictureUpload: React.FC<props> = ({id, setEditImage  }) => {
       setLoadings((prevLoadings) => {
         const newLoadings = [...prevLoadings];
         newLoadings[index] = false;
-        setEditImage(false)
         document.location.reload();
         return newLoadings;
       });
@@ -88,6 +87,13 @@ const PictureUpload: React.FC<props> = ({id, setEditImage  }) => {
       name="picture_upload_form"
       initialValues={{ fileList: [] }}
     >
+      <div className="flex justify-center round mb-10">
+      <img 
+      className="rounded"
+      src={inImage} 
+      alt="profile_pic" 
+      width="200px"/>
+      </div>
       <Form.Item
         name="fileList"
         valuePropName="fileList"
@@ -102,7 +108,9 @@ const PictureUpload: React.FC<props> = ({id, setEditImage  }) => {
         >
               <div>
               <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
+              <div 
+              className="text-white"
+              style={{ marginTop: 8 }}>Upload</div>
             </div>
         </Upload>
       </Form.Item>

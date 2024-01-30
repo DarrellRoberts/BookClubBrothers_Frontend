@@ -4,12 +4,13 @@ import { Button, Form, Input } from "antd";
 
 interface props {
   id: string;
+  inCity: string;
   inCountry: string;
-  setEditCountry: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const EditCountry: React.FC<props> = ({ id, inCountry, setEditCountry }) => {
-  const [country, setCountry] = useState(inCountry);
+const EditCityAndCountry: React.FC<props> = ({ id, inCity, inCountry}) => {
+  const [country, setCountry] = useState(inCountry);  
+  const [city, setCity] = useState(inCity);
   const [error, setError] = useState("");
   const [loadings, setLoadings] = useState([]);
   const { token } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const EditCountry: React.FC<props> = ({ id, inCountry, setEditCountry }) => {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            userInfo: { residence: { country }},
+            userInfo: { residence: { country, city }},
           }),
         }
       );
@@ -80,11 +81,11 @@ const EditCountry: React.FC<props> = ({ id, inCountry, setEditCountry }) => {
       >
         {/* Country */}
         <Form.Item
-          // label="Username"
+          label="Country"
           name="country"
           rules={[
             {
-              message: "Please write your Country",
+              message: "Please write your country",
             },
           ]}
         >
@@ -93,6 +94,24 @@ const EditCountry: React.FC<props> = ({ id, inCountry, setEditCountry }) => {
             onChange={(e) => setCountry(e.target.value)}
             defaultValue={country}
             value={country}
+          />
+        </Form.Item>
+
+        {/* City */}
+        <Form.Item
+          label="City"
+          name="city"
+          rules={[
+            {
+              message: "Please write your city",
+            },
+          ]}
+        >
+          <Input
+              type="text"
+            onChange={(e) => setCity(e.target.value)}
+            defaultValue={city}
+            value={city}
           />
         </Form.Item>
 
@@ -111,12 +130,6 @@ const EditCountry: React.FC<props> = ({ id, inCountry, setEditCountry }) => {
           >
             Submit
           </Button>
-          <Button
-            className=""
-            onClick={() => setEditCountry(false)}
-          >
-            X
-          </Button>
           {error ? <h4 className="errorH">{error}</h4> : null}
         </Form.Item>
       </Form>
@@ -124,4 +137,4 @@ const EditCountry: React.FC<props> = ({ id, inCountry, setEditCountry }) => {
   );
 };
 
-export default EditCountry;
+export default EditCityAndCountry;

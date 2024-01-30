@@ -1,50 +1,48 @@
 import { Button, Modal } from "antd"
 import { useState } from "react"
-import EditUsername from "./EditUsername"
+import PictureUpload from "./PictureUpload"
 
 interface props {
-    setEditUsername: React.Dispatch<React.SetStateAction<boolean>>,
-    editUsername: boolean,
+    setImageUpload: React.Dispatch<React.SetStateAction<boolean>>,
+    imageUpload: boolean,
     id: string,
-    inUsername: string
+    inImage: string
 }
 
-const EditUsernameButton: React.FC<props> = ({
-  setEditUsername, 
-  editUsername, 
+const PictureUploadButton: React.FC<props> = ({
+  setImageUpload, 
+  imageUpload, 
   id, 
-  inUsername}) => {
-  const [modalText, setModalText] = useState(<EditUsername id={id} inUsername={inUsername} />)
+  inImage}) => {
+  const [modalText, setModalText] = useState(<PictureUpload id={id} inImage={inImage} />)
   const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
 
   const showModal = () => {
-      setEditUsername(true);
+      setImageUpload(true);
     };
     const handleOk = () => {
       setConfirmLoading(true);
       setTimeout(() => {
-      setEditUsername(false);
+      setImageUpload(false);
       }, 4000);
-      setModalText(<EditUsername id={id} inUsername={inUsername} />)
+      setModalText(<PictureUpload id={id} inImage={inImage} />)
     };
     const handleCancel = () => {
-      setEditUsername(false);
+      setImageUpload(false);
     };
 return(
     <>
     <div className="flex items-center">
-        {editUsername ? null : (
       <Button
         className=""
         onClick={showModal}
       >
-        Edit
+        Change image
       </Button>
-      )}
       </div>
       <Modal
-        title="Change your Username"
-        open={editUsername}
+        title="Change your profile picture"
+        open={imageUpload}
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
@@ -56,4 +54,4 @@ return(
 )
 }
 
-export default EditUsernameButton
+export default PictureUploadButton

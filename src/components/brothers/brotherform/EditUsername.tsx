@@ -5,10 +5,9 @@ import { Button, Form, Input } from "antd";
 interface props {
   id: string;
   inUsername: string;
-  setEditUsername: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const EditUsername: React.FC<props> = ({ id, inUsername, setEditUsername }) => {
+const EditUsername: React.FC<props> = ({ id, inUsername }) => {
   const [username, setUsername] = useState(inUsername);
   const [error, setError] = useState("");
   const [loadings, setLoadings] = useState([]);
@@ -111,12 +110,6 @@ const EditUsername: React.FC<props> = ({ id, inUsername, setEditUsername }) => {
             htmlType="submit"
           >
             Submit
-          </Button>
-          <Button
-            className=""
-            onClick={() => setEditUsername(false)}
-          >
-            X
           </Button>
           {error ? <h4 className="errorH">{error}</h4> : null}
         </Form.Item>

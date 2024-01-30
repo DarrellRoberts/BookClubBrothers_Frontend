@@ -1,20 +1,14 @@
 import { useEffect, useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import { DoubleLeftOutlined } from "@ant-design/icons"
-import { Button } from "antd"
 import Loader from "../loader/Loader"
 import { AuthContext } from "../../context/authContext";
 import { useJwt } from "react-jwt";
 
 //importing form components
-import PictureUpload from "./brotherform/PictureUpload";
-import EditUsername from "./brotherform/EditUsername"
+import PictureUploadButton from "./brotherform/PictureUploadButton"
 import EditUsernameButton from "./brotherform/EditUsernameButton"
-import EditCity from "./brotherform/EditCity"
-import EditCityButton from "./brotherform/EditCityButton"
-import EditCountry from "./brotherform/EditCountry"
-import EditCountryButton from "./brotherform/EditCountryButton"
-import EditGenre from "./brotherform/EditGenre"
+import EditCityAndCountryButton from "./brotherform/EditCityAndCountryButton"
 import EditGenreButton from "./brotherform/EditGenreButton"
 
 import Back from "../misc/Back"
@@ -39,9 +33,8 @@ const [searchBar, setSearchBar] = useState("");
 const [error, setError] = useState("")
 
 // useState for edit buttons
-const [editImage, setEditImage] = useState<boolean>(false);
+const [imageUpload, setImageUpload] = useState<boolean>(false);
 const [editUsername, setEditUsername] = useState<boolean>(false);
-const [editCity, setEditCity] = useState<boolean>(false);
 const [editCountry, setEditCountry] = useState<boolean>(false);
 const [editGenre, setEditGenre] = useState<boolean>(false);
 
@@ -95,7 +88,6 @@ useEffect(() => {
 const filteredResults = Array.isArray(userData)
 ? userData?.filter((user) => user.username.includes(searchBar))
 : ["No results"];
-
     return (
         <>
     <div className="searchBackCon">
@@ -114,11 +106,9 @@ const filteredResults = Array.isArray(userData)
             <div key={index} className="brotherBook border-black border-4 border-solid m-5 flex">
                 
                 <div className="brotherBookLeft flex flex-col justify-evenly items-center">             
-                {decodedToken?._id === user?._id && editUsername ? (
-                    <EditUsername inUsername={user?.username} id={user?._id} setEditUsername={setEditUsername} />
-                ) : decodedToken?._id === user?._id ? (
+                {decodedToken?._id === user?._id ? (
                     <div className="flex">
-                    <EditUsernameButton setEditUsername={setEditUsername} editUsername={editUsername}  />
+                    <EditUsernameButton setEditUsername={setEditUsername} editUsername={editUsername} inUsername={user?.username} id={user?._id}  />
                     <h2 className="text-black underline">{user?.username}</h2>
                     </div>
                 ) : (
@@ -129,92 +119,55 @@ const filteredResults = Array.isArray(userData)
                     className="opacity-60 grayscale"
                     src={user?.userInfo?.profileURL} 
                     alt="profile_pic" /></Link>
-                {decodedToken?._id === user?._id ?
-                    editImage ?
-                    <>
-                    <div className="absolute">
-                    <div className="flex flex-col items-center justify-center">
-                    <Button
-                    type="primary"
-                    className="bg-black"
-                    onClick={() => setEditImage(false)}
-                    >X</Button>
-                    <PictureUpload id = {user?._id} setEditImage={setEditImage} /> 
-                    </div>
-                    </div>
-                    </> 
-                    :
-                    (
+                {decodedToken?._id === user?._id ? (
                     <div className="flex">
-                    <Button
-                    className="bg-black text-white" 
-                    onClick={() => setEditImage(true)}>Change image
-                    </Button>
+                        <PictureUploadButton  
+                        id={user?._id} 
+                        inImage={user?.userInfo?.profileURL}
+                        imageUpload={imageUpload}
+                        setImageUpload={setImageUpload}/>
                     </div>
                 ) : null}
                 </div>
 
                 <div className="brotherBookRight flex flex-col pl-10 pt-5">
                     <ul>
-                    <li className="brotherList underline pt-5">Location</li>
-                    {user?.userInfo?.residence?.city ? 
-                    decodedToken?._id  === user?._id && editCity ? (
-                    <EditCity inCity={user?.userInfo?.residence?.city} id={user?._id} setEditCity={setEditCity}/>)
-                    : (
+                    <li className="brotherList underline pt-5">Location
+                    {decodedToken?._id === user?._id ? (
+                        <EditCityAndCountryButton 
+                        editCountry={editCountry} 
+                        setEditCountry={setEditCountry} 
+                        id={user?._id} 
+                        inCity={user?.userInfo?.residence?.city} 
+                        inCountry={user?.userInfo?.residence?.country}  />
+                    ) : null}</li>
                     <div className="flex">
+                    {user?.userInfo?.residence?.city ? (
                     <li>City: {user?.userInfo?.residence?.city}</li>
-                    {decodedToken?._id  === user?._id ? (
-                    <EditCityButton editCity={editCity} setEditCity={setEditCity} />)
-                    : null}
-                    </div>)
-                    : 
-                    (
-                    <div className="flex">
-                    {decodedToken?._id  === user?._id && editCity ? (
-                    <EditCity inCity={user?.userInfo?.residence?.city} id={user?._id} setEditCity={setEditCity}/>
-                    ) : (
-                        <li className="text-red-500 font-bold">No city written</li>
+                    )
+                    :
+                    ( 
+                    <li className="text-red-500 font-bold">No city written</li>
                     )}
-                    {decodedToken?._id  === user?._id ? (
-                    <EditCityButton editCity={editCity} setEditCity={setEditCity} />)
-                    : null}
                     </div>
-                    )}
+
 {/* Country */}
-                    {user?.userInfo?.residence?.country ? 
-                    decodedToken?._id  === user?._id && editCountry ? (
-                    <EditCountry inCountry={user?.userInfo?.residence?.country} id={user?._id} setEditCountry={setEditCountry}/>)
-                    : (
                     <div className="flex">
+                    {user?.userInfo?.residence?.country ? (
                     <li>Country: {user?.userInfo?.residence?.country}</li>
-                    {decodedToken?._id  === user?._id ? (
-                    <EditCountryButton editCountry={editCountry} setEditCountry={setEditCountry} />)
-                    : null}
-                    </div>)
-                    : 
-                    (
-                    <div className="flex">
-                    {decodedToken?._id  === user?._id && editCountry ? (
-                    <EditCountry inCountry={user?.userInfo?.residence?.country} id={user?._id} setEditCountry={setEditCountry}/>
-                    ) : (
+                    )
+                    : (
                         <li className="text-red-500 font-bold">No country written</li>
                     )}
-                    {decodedToken?._id  === user?._id ? (
-                    <EditCountryButton editCountry={editCountry} setEditCountry={setEditCountry} />)
-                    : null}
                     </div>
-                    )}
 
                     <div className="flex">
                     <li className="brotherList underline pt-5">Favourite Genres</li>
                     {decodedToken?._id === user._id ? (
-                    <EditGenreButton setEditGenre={setEditGenre} editGenre={editGenre}/>
+                    <EditGenreButton setEditGenre={setEditGenre} editGenre={editGenre} inGenre={user?.userInfo?.favGenre?.map(genre => genre)} id={decodedToken?._id}/>
                     ) : null}
                     </div>
-                    {decodedToken?._id === user._id && editGenre ? (
-                    <EditGenre setEditGenre={setEditGenre} id={decodedToken?._id} inGenre={user?.userInfo?.favGenre?.map(genre => genre)} />
-                    ) :
-                    user?.userInfo?.favGenre?.length > 0 ? user?.userInfo?.favGenre?.map((genre) =>
+                    {user?.userInfo?.favGenre?.length > 0 ? user?.userInfo?.favGenre?.map((genre) =>
                     (
                     <>
                     <li className="list-disc">{genre}</li>
