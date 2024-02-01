@@ -50,7 +50,7 @@ const Booklibrary: React.FC = () => {
   const filteredResults = Array.isArray(bookData)
       ? bookData?.filter((book) => book.title.includes(searchBar) && book.read === true)
       : ["No results"];
-
+console.log(bookData)
   return (
     <>
     <div className="searchBackCon">

@@ -88,6 +88,10 @@ useEffect(() => {
 const filteredResults = Array.isArray(userData)
 ? userData?.filter((user) => user.username.includes(searchBar))
 : ["No results"];
+
+console.log(userData)
+console.log(bookData)
+console.log(userBookObj)
     return (
         <>
     <div className="searchBackCon">

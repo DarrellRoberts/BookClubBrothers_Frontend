@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/authContext";
 import { useJwt } from "react-jwt";
-import Loader from "../../loader/Loader";
+import LoaderNoText from "../../loader/LoaderNoText";
 import "../../../style/dashboard.css";
 
 const Dashboard: React.FC = () => {
@@ -118,7 +118,57 @@ const Dashboard: React.FC = () => {
   return (
     <>
       {loading ? (
-        <Loader />
+      <>
+      <div className="flex m-10">
+      <LoaderNoText />
+      </div>
+      <div className="box">
+            <div className="boxItem">
+              <h2 className="underline">Worst rated book</h2>
+            <LoaderNoText />
+            </div>
+
+            <div className="boxItem">
+              <h2 className="underline">Best rated book</h2>
+            <LoaderNoText />
+            </div>
+
+            <div className="boxItem">
+              <h2>Share of books read:</h2>
+              <h2>Average Score:</h2>
+              <LoaderNoText />
+            </div>
+          </div>
+
+          <div className="flex">
+            <div className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text-white">
+              <Link to="/books">
+                <h2>The Books</h2>
+              </Link>
+            </div>
+
+            <div className="libaryButtons m-10 border-4 border-black p-3 rounded-lg bg-black text-white">
+              <Link to="/brothers">
+                <h2>The Brothers</h2>
+              </Link>
+            </div>
+          </div>
+
+          <div className="m-10 border-4 border-black p-3 rounded-lg bg-black text-white">
+            <h2 className="underline">Books scored</h2>
+            <LoaderNoText />
+          </div>
+
+          <div className="m-10 border-4 border-black p-3 rounded-lg bg-black text-white">
+            <h2 className="underline">Unread Books</h2>
+            <LoaderNoText />
+          </div>
+
+          <div className="m-10 border-4 border-black p-3 rounded-lg bg-black text-white">
+            <h2 className="underline">Comments</h2>
+            <LoaderNoText />
+          </div>
+      </>
       ) : (
         <>
           <h1 className="dashboardTitle">{findUser?.username}</h1>
