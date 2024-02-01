@@ -2,6 +2,7 @@ import Login from "../user/Login"
 import "../../style/header.css"
 import "../../style/headerRes.css"
 import HeaderLinks from "./HeaderLinks"
+import HeaderLinksMobile from "./HeaderLinksMobile"
 import { Button } from "antd"
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
@@ -60,7 +61,7 @@ return (
       </Button>
     </div>
     {handleDesktop ? (
-    <HeaderLinks />) : null}
+    <HeaderLinks />) : <HeaderLinksMobile />}
     <div className="flex items-center mr-10">
       <Link to="/">
       <h2 className="text-white text-3xl greeting">
@@ -73,7 +74,7 @@ return (
   <>
     <Login />
     {handleDesktop ? (
-    <HeaderLinks />) : null}
+    <HeaderLinks />) : <HeaderLinksMobile />}
     <Link to="/">
     <div className="border-4 border-white border-solid pr-5 pl-5 pt-2 pb-2 mr-5 mb-2 mt-2">
       <h2 className="logo">
