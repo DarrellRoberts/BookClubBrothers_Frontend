@@ -93,6 +93,7 @@ useEffect(() => {
                 showCreateBook={showCreateBook} 
                 setShowCreateBook={setShowCreateBook}/>
                 </div>
+
                 <div className="randomBoxRight" 
                 style={{
                   backgroundImage: `URL(${bookData[index]?.imageURL})`, backgroundRepeat: "no-repeat",
@@ -105,6 +106,10 @@ useEffect(() => {
                   </div>
                 ) : (
                   <div className="randomDetailsCon bg-white">
+                    {error ? (
+                      <h2 className="text-red-500 bg-black">{error}</h2>
+                    ) : (
+                    <>
                     <h2>{bookData[index]?.title}</h2>
                     <ul className="text-center">
                       <li>Author: {bookData[index]?.author}</li>
@@ -115,9 +120,15 @@ useEffect(() => {
                       ))}</li>
                       <li>Suggested by: {findUser(bookData[index]?.suggestedBy)} </li>
                     </ul>
-                    <Randomiser bookLength={bookData?.length} bookId={bookData[index]?._id} setIndex={setIndex}/>
+                    <Randomiser 
+                    bookLength={bookData?.length} 
+                    bookId={bookData[index]?._id} 
+                    setIndex={setIndex}
+                    setError={setError}
+                    />
+                    </>
+                    )}
                     </div>
-                    
                   )
                 }
                 </div>

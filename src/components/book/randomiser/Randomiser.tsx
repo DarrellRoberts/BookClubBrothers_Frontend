@@ -4,11 +4,12 @@ import SelectBook from "./bookform/SelectBook"
 
 interface props {
     setIndex: React.Dispatch<React.SetStateAction<number>>
+    setError: React.Dispatch<React.SetStateAction<string>>
     bookLength: number,
     bookId: string
 }
 
-const Randomiser: React.FC<props> = ({setIndex, bookLength, bookId}) => {
+const Randomiser: React.FC<props> = ({setIndex, bookLength, bookId, setError}) => {
 const [showRandom, setShowRandom] = useState(true)
 
 const handleRandomise = () => {
@@ -32,7 +33,7 @@ const handleRandomise = () => {
         >
         Randomise
         </Button>
-        <SelectBook bookId={bookId}/>
+        <SelectBook bookId={bookId} setError={setError}/>
         </>
         ) : null}
         </div>
